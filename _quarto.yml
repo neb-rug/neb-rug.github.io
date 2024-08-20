@@ -1,0 +1,23 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Nebraska R User Group"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      # - about.qmd
+  page-footer:
+    background: light
+    left: "&copy; 2024 Nebraska R User Group. Powered by Quarto."
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+
+
