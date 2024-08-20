@@ -4,5 +4,5 @@ title: "Nebraska R User Group"
 
 ![](media/nebrug_logo_white.png)
 
-Welcome to the Nebraska R User Group! We are just now getting started, thanks to an [R Consortium](https://www.r-consortium.org/) User Group Grant. So stay tuned as we get things set up. For now, keep up-to-date on our events by our joining our [meetup.com group](https://www.meetup.com/nebraskarusergroup/) and our [Google group](https://groups.google.com/g/nebraskarusergroup).
+Welcome to the Nebraska R User Group! We are just now getting started, thanks to an [R Consortium](https://www.r-consortium.org/) User Group Grant. So stay tuned as we get things set up. For now, keep up-to-date on our events by our joining our [meetup.com group](https://www.meetup.com/nebraskarusergroup/).
 
