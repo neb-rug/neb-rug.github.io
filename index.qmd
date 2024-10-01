@@ -8,4 +8,4 @@ Welcome to the Nebraska R User Group! We are just now getting started, thanks to
 
 Sponsored by
 
-![](media/RConsortium_white.png){width=30% fig-alt="R Consortium logo"}
+[![](media/RConsortium_white.png){width=30% fig-alt="R Consortium logo"}](https://www.r-consortium.org/)
