@@ -1,0 +1,15 @@
+---
+title: 'Welcome to Neb-RUG!'
+author:
+  - Jeffrey Stevens
+date: '2024-10-03'
+categories: 
+  - meetup
+description: "We're kicking off the Nebraska R User Group."
+---
+
+We are excited to kickoff the Nebraska R User Group! This group is for anyone in Nebraska who is interested in using R for statistics, data visualization, machine learning, and more. Whether you are a beginner or an experienced R user, this group is a great opportunity to network with like-minded individuals, share resources and tips, and collaborate on projects. Join us for regular meetups, workshops, and discussions to deepen your R programming skills and explore new possibilities in data analysis. Let's come together to learn, grow, and advance our data science journey with R!
+
+To kickoff this group, we will have our first meeting on October 29th at the Center for Brain, Biology & Behavior inside Memorial Stadium on the University of Nebraska-Lincoln campus. Check out our [events page](../../events.qmd) and join our [Meetup group](https://www.meetup.com/neb-rug/) to find out about a future (and past) events. We hope to see you at our kickoff meeting!
+
+![](images/eaststadium.jpg){fig-alt="Photo of the east side of Memorial Stadium, which has the Center for Brain, Biology & Behavior on the left side."}

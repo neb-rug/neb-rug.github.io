@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Nebraska R User Group</title>
+<link>https://neb-rug.github.io/blog.html</link>
+<atom:link href="https://neb-rug.github.io/blog.xml" rel="self" type="application/rss+xml"/>
+<description></description>
+<generator>quarto-1.5.57</generator>
+<lastBuildDate>Thu, 03 Oct 2024 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>Welcome to Neb-RUG!</title>
+  <dc:creator>Jeffrey Stevens</dc:creator>
+  <link>https://neb-rug.github.io/posts/welcome/welcome.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>We are excited to kickoff the Nebraska R User Group! This group is for anyone in Nebraska who is interested in using R for statistics, data visualization, machine learning, and more. Whether you are a beginner or an experienced R user, this group is a great opportunity to network with like-minded individuals, share resources and tips, and collaborate on projects. Join us for regular meetups, workshops, and discussions to deepen your R programming skills and explore new possibilities in data analysis. Let’s come together to learn, grow, and advance our data science journey with R!</p>
+<p>To kickoff this group, we will have our first meeting on October 29th at the Center for Brain, Biology &amp; Behavior inside Memorial Stadium on the University of Nebraska-Lincoln campus. Check out our <a href="../../events.html">events page</a> and join our <a href="https://www.meetup.com/neb-rug/">Meetup group</a> to find out about a future (and past) events. We hope to see you at our kickoff meeting!</p>
+<p><img src="https://neb-rug.github.io/posts/welcome/images/eaststadium.jpg" class="img-fluid" alt="Photo of the east side of Memorial Stadium, which has the Center for Brain, Biology &amp; Behavior on the left side."></p>
+
+
+
+ ]]></description>
+  <category>meetup</category>
+  <guid>https://neb-rug.github.io/posts/welcome/welcome.html</guid>
+  <pubDate>Thu, 03 Oct 2024 05:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>
