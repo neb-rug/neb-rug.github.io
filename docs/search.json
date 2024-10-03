@@ -4,13 +4,34 @@
     "href": "index.html",
     "title": "Nebraska R User Group",
     "section": "",
-    "text": "Welcome to the Nebraska R User Group! We are just now getting started, thanks to an R Consortium User Group Grant. So stay tuned as we get things set up. For now, keep up-to-date on our events by our joining our meetup group.\nSponsored by"
+    "text": "Welcome to the Nebraska R User Group! We are just now getting started, thanks to an R Consortium User Group Grant. So stay tuned as we get things set up. For now, keep up-to-date on our events by our joining our Meetup group.\nSponsored by"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "events.html",
+    "href": "events.html",
+    "title": "Events",
     "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
+    "text": "All Neb-RUG events are posted on our Meetup page. Join now to receive invites to future events!"
+  },
+  {
+    "objectID": "events.html#nebraska-r-user-group-kickoff-meeting",
+    "href": "events.html#nebraska-r-user-group-kickoff-meeting",
+    "title": "Events",
+    "section": "Nebraska R User Group Kickoff Meeting",
+    "text": "Nebraska R User Group Kickoff Meeting\n\n4-5:30pm, Tuesday, October 29th\nCenter for Brain, Biology & Behavior, University of Nebraska-Lincoln"
+  },
+  {
+    "objectID": "posts/welcome/welcome.html",
+    "href": "posts/welcome/welcome.html",
+    "title": "Welcome to Neb-RUG!",
+    "section": "",
+    "text": "We are excited to kickoff the Nebraska R User Group! This group is for anyone in Nebraska who is interested in using R for statistics, data visualization, machine learning, and more. Whether you are a beginner or an experienced R user, this group is a great opportunity to network with like-minded individuals, share resources and tips, and collaborate on projects. Join us for regular meetups, workshops, and discussions to deepen your R programming skills and explore new possibilities in data analysis. Let’s come together to learn, grow, and advance our data science journey with R!\nTo kickoff this group, we will have our first meeting on October 29th at the Center for Brain, Biology & Behavior inside Memorial Stadium on the University of Nebraska-Lincoln campus. Check out our events page and join our Meetup group to find out about a future (and past) events. We hope to see you at our kickoff meeting!"
+  },
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "Neb-RUG Blog",
+    "section": "",
+    "text": "Welcome to Neb-RUG!\n\n\n\nmeetup\n\n\n\nWe’re kicking off the Nebraska R User Group.\n\n\n\nJeffrey Stevens\n\n\nOct 3, 2024\n\n\n\n\n\n\n\n\nNo matching items"
   }
 ]
