@@ -4,7 +4,7 @@ title: "Nebraska R User Group"
 
 ![](media/nebrug_logo_white.png){fig-alt="Nebraska R User Group logo of R logo set in center of dark grey state of Nebraska."}
 
-Welcome to the Nebraska R User Group! We are just now getting started, thanks to an [R Consortium](https://www.r-consortium.org/) User Group Grant. So stay tuned as we get things set up. For now, keep up-to-date on our events by our joining our [meetup group](https://www.meetup.com/nebraskarusergroup/).
+Welcome to the Nebraska R User Group! We are just now getting started, thanks to an [R Consortium](https://www.r-consortium.org/) User Group Grant. So stay tuned as we get things set up. For now, keep up-to-date on our events by our joining our [Meetup group](https://www.meetup.com/neb-rug/).
 
 Sponsored by
 
