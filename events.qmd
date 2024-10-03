@@ -1,0 +1,10 @@
+---
+title: "Events"
+toc: false
+---
+
+All Neb-RUG events are posted on our [Meetup page](https://www.meetup.com/neb-rug/). Join now to receive invites to future events!
+
+## [Nebraska R User Group Kickoff Meeting](https://www.meetup.com/neb-rug/events/303806893/)
+* 4-5:30pm, Tuesday, October 29th
+* [Center for Brain, Biology & Behavior](https://cb3.unl.edu), University of Nebraska-Lincoln
