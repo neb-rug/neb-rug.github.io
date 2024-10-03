@@ -8,7 +8,12 @@ website:
     left:
       - href: index.qmd
         text: Home
+      - href: events.qmd
+        text: Events
+      - href: blog.qmd
+        text: Blog
       # - about.qmd
+  site-url: https://neb-rug.github.io/
   page-footer:
     background: light
     left: "&copy; 2024 Nebraska R User Group. Powered by Quarto."
