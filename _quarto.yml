@@ -12,8 +12,13 @@ website:
         text: Events
       - href: blog.qmd
         text: Blog
+    right:
+      - icon: github
+        href: https://github.com/neb-rug/neb-rug.github.io
       # - about.qmd
   site-url: https://neb-rug.github.io/
+  repo-url: https://github.com/neb-rug/neb-rug.github.io
+  repo-actions: [edit, source, issue]
   page-footer:
     background: light
     left: "&copy; 2024 Nebraska R User Group. Powered by Quarto."
