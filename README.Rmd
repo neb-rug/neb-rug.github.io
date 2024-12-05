@@ -1,0 +1,24 @@
+---
+title: "Nebraska R User Group"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Sign up for the Nebraska R User Group on [meetup](https://www.meetup.com/neb-rug/).
+
+## Our Events
+
+```{r warning = FALSE, echo=FALSE, message=FALSE}
+# From Heike Hofmann (https://github.com/heike/NebRUG-2024)
+source("schedule.R")
+class_cal
+
+Cal %>% filter(category!="NA") %>% select(date) %>%
+  mutate(title = c("Meetup", "Extensions to ggplot2 are easy – right?"),
+         speaker = c("", "[Heike Hofmann](https://github.com/heike)"),
+         link = c("", "[html](https://heike.github.io/NebRUG-2024/2024-12-04-ggplot2-extensions/ggplot2-extensions.html), [pdf](https://heike.github.io/NebRUG-2024/2024-12-04-ggplot2-extensions/ggplot2-extensions.pdf)")) %>% 
+  knitr::kable(col.names = c("Date", "Title", "Speaker", "Slides"))
+```
