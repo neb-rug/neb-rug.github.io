@@ -8,6 +8,7 @@ All Neb-RUG events are posted on our [Meetup page](https://www.meetup.com/neb-ru
 ## [Extensions to ggplot2 are easy – right? by Dr. Heike Hofmann](https://www.meetup.com/neb-rug/events/304415398/)
 * 4:30-6:00pm, Wednesday, December 4th
 * [Nebraska East Union](https://unions.unl.edu/east/), University of Nebraska-Lincoln
+* Slides ([html](https://heike.github.io/NebRUG-2024/2024-12-04-ggplot2-extensions/ggplot2-extensions.html) [pdf](https://heike.github.io/NebRUG-2024/2024-12-04-ggplot2-extensions/ggplot2-extensions.pdf))
 
 ## [Nebraska R User Group Kickoff Meeting](https://www.meetup.com/neb-rug/events/303806893/)
 * 4-5:30pm, Tuesday, October 29th
