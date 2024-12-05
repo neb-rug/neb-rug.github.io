@@ -1,0 +1,158 @@
+---
+title: 'Extensions to ggplot2 are easy – right?'
+author:
+  - Jeffrey Stevens
+date: '2024-12-05'
+categories:
+  - extensions
+  - geoms
+  - ggplot2
+  - talk
+description: "Inaugural Nebraska R User Group talk given by Dr. Heike Hofmann."
+draft: true
+---
+
+On December 4, [Dr. Heike Hofmann](https://github.com/heike) gave the inaugural Nebraska R User Group talk on "Extensions to ggplot2 are easy – right?" ([slides](https://heike.github.io/NebRUG-2024/2024-12-04-ggplot2-extensions/ggplot2-extensions.html)). Many of us have used the [`{ggplot2}`](https://ggplot2.tidyverse.org/) package to plot our data. But have you ever wanted to create new ways of plotting data that weren't available? `{ggplot2}` is extensible, letting you create your own custom plotting functions. Dr. Hofmann walked us through how to do this. Here are a few highlights.
+
+# Setting up the data
+
+First, we need a good data set to work with. Dr. Hofmann recommended check the [#TidyTuesday](https://github.com/rfordatascience/tidytuesday) website for data sets. She chose to use the [Southern Resident Killer Whale Encounters](https://github.com/rfordatascience/tidytuesday/blob/main/data/2024/2024-10-15/readme.md) data set, which tracks the location of orcas in the Pacific Northwest’s Salish Sea by the [Center for Whale Research](https://www.whaleresearch.com/encounters). 
+
+![Source: [Center for Whale Research](https://www.whaleresearch.com/2024-69)](images/orca_cwr.jpg){fig-alt="Black and white orca breaching out of the water"}
+
+Let's import the data from the #TidyTuesday data repository.
+
+```{r message=FALSE}
+orcas <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2024/2024-10-15/orcas.csv')
+```
+
+A quick plot of this data shows the locations of encounters:
+
+```{r warning=FALSE}
+library(ggplot2)
+orcas |> 
+  ggplot(aes(x = begin_longitude, y = begin_latitude)) +
+  geom_point()
+```
+
+# Extending ggplot
+
+But what if we want to draw a polygon around the perimeter of the data points to show the extent of the area covered by the data? In geometry, this is called a [convex hull](https://en.wikipedia.org/wiki/Convex_hull). There is not a function in `{ggplot2}` that automatically plots convex hulls. So we need to create our own extension to do this.
+
+As a reminder, we use _geoms_ to define how data are mapped to physical properties of the plots (e.g., points, lines, polygons, text). So above we used the `geom_points()` function to map the longitude and latitude data to x- and y-coordinates on our Cartesian coordinate system.
+
+But for every _geom_ there is a _stat_ that computes statistics on the data before mapping to the plot via the _geom_. The _stat_ underlying `geom_points()` is `stat_identity()`. The "identity" part just means that the raw data is passed directly to the _geom_ (there are no actual computations run on the data).
+
+Therefore, to create a new type of plotting function, we must create a new _geom_ and a new _stat_. Fortunately, we don't have to do these from scratch. We can modify existing _geoms_ and _stats_. So it makes sense to find the existing _geom_ that is closest to what you want to do, and modify that.
+
+To plot a convex hull, we must first find the hull, which means finding the points that represent the corners of the hull. So our new plotting function must find a subset of points and then plot a polygon connecting those points. 
+
+# Creating _stat_ objects and functions
+
+Before we create a new _stat_ function, we have to create a new _stat_ object that computes the convex hull. Fortunately, there is a function for that (`grDevices::chull()`) that we can embed in our _stat_ object. So here we use `ggproto()` to create a new object based on the prototype _stat_ that computes for each group the subset of data points that represent the convex hull.
+
+```{r}
+StatChull <- ggproto(
+  "StatChull", Stat,
+  required_aes = c("x", "y"),
+  compute_group = function(data, scales) {
+     data[chull(data$x, data$y), , drop = FALSE]
+  }
+)
+```
+
+Now we need to create the _stat_ function. Because we need the function to draw a polygon based on the convex hull points, we will use the `polygon` _geom_ as the base for this function. We include a `layer()` function and keep most of the rest of the arguments this same to avoid messing up all of the automatic benefits we get of using the `polygon` _geom_.
+
+```{r}
+stat_chull <- function(
+    mapping = NULL, data = NULL, geom = "polygon",
+    position = "identity", na.rm = FALSE,
+    show.legend = NA,  inherit.aes = TRUE, ...) {
+  layer(
+    stat = StatChull, data = data, mapping = mapping, geom = geom, 
+    position = position, show.legend = show.legend, 
+    inherit.aes = inherit.aes, params = list(na.rm = na.rm, ...)
+  )
+}
+```
+
+We can now use our new `stat_chull()` function two draw the convex hull around the data. 
+```{r warning=FALSE}
+orcas |> 
+  ggplot(aes(x = begin_longitude, y = begin_latitude)) +
+  stat_chull() + 
+  geom_point() 
+```
+
+We have drawn a convex hull!  But the fill and transparency defaults aren't great. Fortunately, we can pass standard aesthetic arguments to the function to control line color and polygon fill and transparency.
+
+```{r warning=FALSE}
+orcas |> 
+  ggplot(aes(x = begin_longitude, y = begin_latitude)) +
+  stat_chull(fill="grey60", colour = "grey30", alpha = 0.8) + 
+  geom_point() 
+```
+# Creating _geom_ objects and functions
+
+But if we want to set different defaults from the original _geom_ (in this case `polygon`), we also need to set up our own _geom_ object and function. We will create a new _geom_ object called `GeomChull` based on the prototype object `GeomPolygon`. Then we'll define new aesthetic defaults.
+
+```{r}
+GeomChull <- ggproto(
+  "GeomChull", GeomPolygon,
+  default_aes = ggplot2::aes(
+    colour = "grey30", fill = "grey50", alpha = 0.5, # new ones
+    linewidth=0.5, linetype = 1, subgroup=NULL
+    )
+)
+```
+
+With the new _geom_ object in place, we need to create a new _geom_ function that uses the `chull` stat that we created and the `GeomChull` object.
+
+```{r warning=FALSE}
+geom_chull <- function (mapping = NULL, data = NULL, 
+                        stat = "chull", position = "identity", 
+    rule = "evenodd", ..., na.rm = FALSE, show.legend = NA, inherit.aes = TRUE) 
+{
+    layer(data = data, mapping = mapping, stat = stat, 
+          geom = GeomChull, position = position, 
+          show.legend = show.legend, inherit.aes = inherit.aes, 
+        params = list(na.rm = na.rm, rule = rule, ...))
+}
+```
+
+Now we can use `geom_chull()` instead of `stat_chull()` and we have a new set of default aesthetics.
+
+```{r warning=FALSE}
+orcas |> 
+  ggplot(aes(x = begin_longitude, y = begin_latitude)) +
+  geom_chull() + 
+  geom_point() 
+```
+
+# Bonus side effects
+
+Again, because we left so many of the arguments the same, we can do cool things like automatically have the function apply to facets.
+
+```{r warning=FALSE}
+orcas |> 
+  ggplot(aes(x = begin_longitude, y = begin_latitude)) +
+  geom_chull() + 
+  geom_point() +
+  facet_wrap(~lubridate::month(date))
+```
+
+Or apply the function to groups.
+
+```{r warning=FALSE}
+orcas |> 
+  ggplot(aes(x = begin_longitude, y = begin_latitude, 
+             colour = year, group = year)) +
+  geom_chull() + 
+  geom_point() 
+```
+
+# Other extensions
+
+See---we told you extensions to ggplot2 would be easy – right? For other ggplot2 extensions that folks have created, check out the [ggplot2 extensions gallery](https://exts.ggplot2.tidyverse.org/gallery/), which includes extensions such as [`{ggmosaic}`](https://github.com/haleyjeppson/ggmosaic), [`{ggpcp}`](https://heike.github.io/ggpcp/), and [`{ggrepel}`](https://github.com/slowkow/ggrepel) just to name a few!
+
+
