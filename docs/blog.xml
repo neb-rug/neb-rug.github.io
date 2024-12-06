@@ -10,7 +10,517 @@
 <atom:link href="https://neb-rug.github.io/blog.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.6.39</generator>
-<lastBuildDate>Thu, 03 Oct 2024 05:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 06 Dec 2024 06:00:00 GMT</lastBuildDate>
+<item>
+  <title>Extensions to ggplot2 are easy – right?</title>
+  <dc:creator>Jeffrey Stevens</dc:creator>
+  <link>https://neb-rug.github.io/posts/ggplot2_extensions/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>On December 4, <a href="https://github.com/heike">Dr.&nbsp;Heike Hofmann</a> gave the inaugural Nebraska R User Group talk on “Extensions to ggplot2 are easy – right?” (<a href="https://heike.github.io/NebRUG-2024/2024-12-04-ggplot2-extensions/ggplot2-extensions.html">slides</a>). Many of us have used the <a href="https://ggplot2.tidyverse.org/"><code>{ggplot2}</code></a> package to plot our data. But have you ever wanted to create new ways of plotting data that weren’t available? <code>{ggplot2}</code> is extensible, letting you create your own custom plotting functions. Dr.&nbsp;Hofmann walked us through how to do this. Here are a few highlights.</p>
+<section id="setting-up-the-data" class="level1">
+<h1>Setting up the data</h1>
+<p>First, we need a good data set to work with. Dr.&nbsp;Hofmann recommended check the <a href="https://github.com/rfordatascience/tidytuesday">#TidyTuesday</a> website for data sets. She chose to use the <a href="https://github.com/rfordatascience/tidytuesday/blob/main/data/2024/2024-10-15/readme.md">Southern Resident Killer Whale Encounters</a> data set, which tracks the location of orcas in the Pacific Northwest’s Salish Sea by the <a href="https://www.whaleresearch.com/encounters">Center for Whale Research</a>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://neb-rug.github.io/posts/ggplot2_extensions/images/orca_cwr.jpg" class="img-fluid figure-img" alt="Black and white orca breaching out of the water"></p>
+<figcaption>Source: <a href="https://www.whaleresearch.com/2024-69">Center for Whale Research</a></figcaption>
+</figure>
+</div>
+<p>Let’s import the data from the #TidyTuesday data repository.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">orcas <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> readr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">read_csv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2024/2024-10-15/orcas.csv'</span>)</span></code></pre></div>
+</div>
+<p>A quick plot of this data shows the locations of encounters:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ggplot2)</span>
+<span id="cb2-2">orcas <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb2-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> begin_longitude, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> begin_latitude)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_point</span>()</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://neb-rug.github.io/posts/ggplot2_extensions/index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="extending-ggplot" class="level1">
+<h1>Extending ggplot</h1>
+<p>But what if we want to draw a polygon around the perimeter of the data points to show the extent of the area covered by the data? In geometry, this is called a <a href="https://en.wikipedia.org/wiki/Convex_hull">convex hull</a>. There is not a function in <code>{ggplot2}</code> that automatically plots convex hulls. So we need to create our own extension to do this.</p>
+<p>As a reminder, we use <em>geoms</em> to define how data are mapped to physical properties of the plots (e.g., points, lines, polygons, text). So above we used the <code>geom_points()</code> function to map the longitude and latitude data to x- and y-coordinates on our Cartesian coordinate system.</p>
+<p>But for every <em>geom</em> there is a <em>stat</em> that computes statistics on the data before mapping to the plot via the <em>geom</em>. The <em>stat</em> underlying <code>geom_points()</code> is <code>stat_identity()</code>. The “identity” part just means that the raw data is passed directly to the <em>geom</em> (there are no actual computations run on the data).</p>
+<p>Therefore, to create a new type of plotting function, we must create a new <em>geom</em> and a new <em>stat</em>. Fortunately, we don’t have to do these from scratch. We can modify existing <em>geoms</em> and <em>stats</em>. So it makes sense to find the existing <em>geom</em> that is closest to what you want to do, and modify that.</p>
+<p>To plot a convex hull, we must first find the hull, which means finding the points that represent the corners of the hull. So our new plotting function must find a subset of points and then plot a polygon connecting those points.</p>
+</section>
+<section id="creating-stat-objects-and-functions" class="level1">
+<h1>Creating <em>stat</em> objects and functions</h1>
+<p>Before we create a new <em>stat</em> function, we have to create a new <em>stat</em> object that computes the convex hull. Fortunately, there is a function for that (<code>grDevices::chull()</code>) that we can embed in our <em>stat</em> object. So here we use <code>ggproto()</code> to create a new object based on the prototype <em>stat</em> that computes for each group the subset of data points that represent the convex hull.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">StatChull <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggproto</span>(</span>
+<span id="cb3-2">  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"StatChull"</span>, Stat,</span>
+<span id="cb3-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">required_aes =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"x"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"y"</span>),</span>
+<span id="cb3-4">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">compute_group =</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(data, scales) {</span>
+<span id="cb3-5">     data[<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">chull</span>(data<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>x, data<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>y), , drop <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>]</span>
+<span id="cb3-6">  }</span>
+<span id="cb3-7">)</span></code></pre></div>
+</div>
+<p>Now we need to create the <em>stat</em> function. Because we need the function to draw a polygon based on the convex hull points, we will use the <code>polygon</code> <em>geom</em> as the base for this function. We include a <code>layer()</code> function and keep most of the rest of the arguments this same to avoid messing up all of the automatic benefits we get of using the <code>polygon</code> <em>geom</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">stat_chull <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(</span>
+<span id="cb4-2">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mapping =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NULL</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NULL</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">geom =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"polygon"</span>,</span>
+<span id="cb4-3">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">position =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"identity"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">na.rm =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>,</span>
+<span id="cb4-4">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">show.legend =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NA</span>,  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">inherit.aes =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>, ...) {</span>
+<span id="cb4-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">layer</span>(</span>
+<span id="cb4-6">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">stat =</span> StatChull, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> data, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mapping =</span> mapping, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">geom =</span> geom, </span>
+<span id="cb4-7">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">position =</span> position, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">show.legend =</span> show.legend, </span>
+<span id="cb4-8">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">inherit.aes =</span> inherit.aes, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">params =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">na.rm =</span> na.rm, ...)</span>
+<span id="cb4-9">  )</span>
+<span id="cb4-10">}</span></code></pre></div>
+</div>
+<p>We can now use our new <code>stat_chull()</code> function two draw the convex hull around the data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">orcas <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb5-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> begin_longitude, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> begin_latitude)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb5-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">stat_chull</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb5-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_point</span>() </span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://neb-rug.github.io/posts/ggplot2_extensions/index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We have drawn a convex hull! But the fill and transparency defaults aren’t great. Fortunately, we can pass standard aesthetic arguments to the function to control line color and polygon fill and transparency.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">orcas <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb6-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> begin_longitude, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> begin_latitude)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">stat_chull</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"grey60"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"grey30"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">alpha =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.8</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb6-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_point</span>() </span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://neb-rug.github.io/posts/ggplot2_extensions/index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="creating-geom-objects-and-functions" class="level1">
+<h1>Creating <em>geom</em> objects and functions</h1>
+<p>But if we want to set different defaults from the original <em>geom</em> (in this case <code>polygon</code>), we also need to set up our own <em>geom</em> object and function. We will create a new <em>geom</em> object called <code>GeomChull</code> based on the prototype object <code>GeomPolygon</code>. Then we’ll define new aesthetic defaults.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1">GeomChull <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggproto</span>(</span>
+<span id="cb7-2">  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"GeomChull"</span>, GeomPolygon,</span>
+<span id="cb7-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">default_aes =</span> ggplot2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(</span>
+<span id="cb7-4">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"grey30"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"grey50"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">alpha =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>, <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># new ones</span></span>
+<span id="cb7-5">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">linewidth=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">linetype =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">subgroup=</span><span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NULL</span></span>
+<span id="cb7-6">    )</span>
+<span id="cb7-7">)</span></code></pre></div>
+</div>
+<p>With the new <em>geom</em> object in place, we need to create a new <em>geom</em> function that uses the <code>chull</code> stat that we created and the <code>GeomChull</code> object.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">geom_chull <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span> (<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mapping =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NULL</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NULL</span>, </span>
+<span id="cb8-2">                        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">stat =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"chull"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">position =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"identity"</span>, </span>
+<span id="cb8-3">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">rule =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"evenodd"</span>, ..., <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">na.rm =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">show.legend =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NA</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">inherit.aes =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>) </span>
+<span id="cb8-4">{</span>
+<span id="cb8-5">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">layer</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> data, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mapping =</span> mapping, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">stat =</span> stat, </span>
+<span id="cb8-6">          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">geom =</span> GeomChull, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">position =</span> position, </span>
+<span id="cb8-7">          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">show.legend =</span> show.legend, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">inherit.aes =</span> inherit.aes, </span>
+<span id="cb8-8">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">params =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">na.rm =</span> na.rm, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">rule =</span> rule, ...))</span>
+<span id="cb8-9">}</span></code></pre></div>
+</div>
+<p>Now we can use <code>geom_chull()</code> instead of <code>stat_chull()</code> and we have a new set of default aesthetics.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1">orcas <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb9-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> begin_longitude, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> begin_latitude)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb9-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_chull</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb9-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_point</span>() </span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://neb-rug.github.io/posts/ggplot2_extensions/index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="bonus-side-effects" class="level1">
+<h1>Bonus side effects</h1>
+<p>Again, because we left so many of the arguments the same, we can do cool things like automatically have the function apply to facets.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">orcas <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb10-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> begin_longitude, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> begin_latitude)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb10-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_chull</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb10-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_point</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb10-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">facet_wrap</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span>lubridate<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">month</span>(date))</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://neb-rug.github.io/posts/ggplot2_extensions/index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Or apply the function to groups.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1">orcas <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb11-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> begin_longitude, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> begin_latitude, </span>
+<span id="cb11-3">             <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> year, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">group =</span> year)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb11-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_chull</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb11-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_point</span>() </span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://neb-rug.github.io/posts/ggplot2_extensions/index_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="other-extensions" class="level1">
+<h1>Other extensions</h1>
+<p>See—we told you extensions to ggplot2 would be easy – right? For other ggplot2 extensions that folks have created, check out the <a href="https://exts.ggplot2.tidyverse.org/gallery/">ggplot2 extensions gallery</a>, which includes extensions such as <a href="https://github.com/haleyjeppson/ggmosaic"><code>{ggmosaic}</code></a>, <a href="https://heike.github.io/ggpcp/"><code>{ggpcp}</code></a>, and <a href="https://github.com/slowkow/ggrepel"><code>{ggrepel}</code></a> just to name a few!</p>
+
+
+</section>
+
+ ]]></description>
+  <category>extensions</category>
+  <category>geoms</category>
+  <category>ggplot2</category>
+  <category>talk</category>
+  <guid>https://neb-rug.github.io/posts/ggplot2_extensions/</guid>
+  <pubDate>Fri, 06 Dec 2024 06:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Welcome to Neb-RUG!</title>
   <dc:creator>Jeffrey Stevens</dc:creator>

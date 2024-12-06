@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/ggplot2_extensions/index.html",
       "/posts/welcome/welcome.html"
     ]
   }

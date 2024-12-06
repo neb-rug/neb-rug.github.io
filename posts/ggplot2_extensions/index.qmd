@@ -2,14 +2,14 @@
 title: 'Extensions to ggplot2 are easy – right?'
 author:
   - Jeffrey Stevens
-date: '2024-12-05'
+date: '2024-12-06'
 categories:
   - extensions
   - geoms
   - ggplot2
   - talk
 description: "Inaugural Nebraska R User Group talk given by Dr. Heike Hofmann."
-draft: true
+draft: false
 ---
 
 On December 4, [Dr. Heike Hofmann](https://github.com/heike) gave the inaugural Nebraska R User Group talk on "Extensions to ggplot2 are easy – right?" ([slides](https://heike.github.io/NebRUG-2024/2024-12-04-ggplot2-extensions/ggplot2-extensions.html)). Many of us have used the [`{ggplot2}`](https://ggplot2.tidyverse.org/) package to plot our data. But have you ever wanted to create new ways of plotting data that weren't available? `{ggplot2}` is extensible, letting you create your own custom plotting functions. Dr. Hofmann walked us through how to do this. Here are a few highlights.
