@@ -21,7 +21,7 @@ website:
   repo-actions: [edit, source, issue]
   page-footer:
     background: light
-    left: "&copy; 2024 Nebraska R User Group. Powered by Quarto."
+    left: "&copy; 2025 Nebraska R User Group. Powered by Quarto."
 
 format:
   html:
