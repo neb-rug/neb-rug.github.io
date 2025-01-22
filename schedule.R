@@ -20,24 +20,21 @@ wom <- function(date) {
 }
 
 # Create a data frame of dates, assign to Cal
-Cal <- tibble(date = semester_dates)  |>
+full_cal <- tibble(date = semester_dates)  |>
   mutate(mon = lubridate::month(date, label = TRUE, abbr = FALSE), # get month label
          wkdy = weekdays(date, abbreviate = TRUE), # get weekday label
          wkdy = fct_relevel(wkdy, "Sun", "Mon", "Tue", "Wed", "Thu","Fri","Sat"), # make sure Sunday comes first
          semester = date %in% semester_dates, # is date part of the semester?
          day = lubridate::mday(date), # get day of month to add later as a label
          # Below: our custom wom() function
-         week = wom(date))
-
-# Create a category variable, for filling.
-# I can probably make this a case_when(), but this will work.
-
-Cal <- Cal |>
+         week = wom(date)) |>
   mutate(category = ifelse(date %in% meetup_dates, "Meetup",
                            ifelse(date %in% talk_dates, "Talk","NA"))
   )
 
-class_cal <- Cal |>
+current_cal <- full_cal |>
+  filter(date >= "2025-01-01")
+class_cal <- current_cal |>
   filter(date >= "2025-01-01") |>
   ggplot(aes(wkdy, week)) +
   theme_bw() +
@@ -61,4 +58,4 @@ class_cal <- Cal |>
   ),
   #... but also suppress a label for a non-class semester day
   breaks=c("Talk", "Meetup")) +
-  ggtitle(year(Cal$date[1]))
+  ggtitle(year(current_cal$date[1]))

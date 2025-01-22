@@ -6,7 +6,7 @@ Sign up for the Nebraska R User Group on
 
 ## Our Events
 
-![](README_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
+![](README_files/figure-gfm/calendar-1.png)<!-- -->
 
 | Date | Title | Speaker | Slides |
 |:---|:---|:---|:---|

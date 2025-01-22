@@ -11,12 +11,12 @@ Sign up for the Nebraska R User Group on [meetup](https://www.meetup.com/neb-rug
 
 ## Our Events
 
-```{r warning = FALSE, echo=FALSE, message=FALSE}
+```{r calendar, warning = FALSE, echo=FALSE, message=FALSE}
 # From Heike Hofmann (https://github.com/heike/NebRUG-2024)
 source("schedule.R")
 class_cal
 
-Cal |>  
+full_cal |>  
   filter(category!="NA") |> 
   select(date) |> 
   mutate(title = c("Meetup", "Extensions to ggplot2 are easy – right?", "Talking to LLMs Through R"),
