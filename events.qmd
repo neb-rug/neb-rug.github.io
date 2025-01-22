@@ -5,10 +5,16 @@ toc: false
 
 All Neb-RUG events are posted on our [Meetup page](https://www.meetup.com/neb-rug/). Join now to receive invites to future events!
 
+## [Talking to LLMs Through R by Dr. Matt Waite](https://www.meetup.com/neb-rug/events/305756231/)
+* 4:00-5:30pm, Tuesday, February 18th
+* [Center for Brain, Biology & Behavior](https://cb3.unl.edu), University of Nebraska-Lincoln
+
+
 ## [Extensions to ggplot2 are easy – right? by Dr. Heike Hofmann](https://www.meetup.com/neb-rug/events/304415398/)
 * 4:30-6:00pm, Wednesday, December 4th
 * [Nebraska East Union](https://unions.unl.edu/east/), University of Nebraska-Lincoln
 * Slides ([html](https://heike.github.io/NebRUG-2024/2024-12-04-ggplot2-extensions/ggplot2-extensions.html) [pdf](https://heike.github.io/NebRUG-2024/2024-12-04-ggplot2-extensions/ggplot2-extensions.pdf))
+
 
 ## [Nebraska R User Group Kickoff Meeting](https://www.meetup.com/neb-rug/events/303806893/)
 * 4-5:30pm, Tuesday, October 29th

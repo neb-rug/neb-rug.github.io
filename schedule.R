@@ -6,11 +6,11 @@ library(tidyverse)
 
 meetup_dates <- c(ymd(20241029))
 
-talk_dates <- c(ymd(20241204))
+talk_dates <- c(ymd(20241204, 20250218))
 
 # What are the full dates of the semester? Here, I'll exclude exam week as I like to do.
 # In this case: 6 January to 23 April
-semester_dates <- seq(ymd(20241001), ymd(20241231), by=1)
+semester_dates <- seq(ymd(20250201), ymd(20250430), by=1)
 
 # Custom function for treating the first day of the month as the first week
 # of the month up until the first Sunday (unless Sunday was the start of the month)
