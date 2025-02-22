@@ -8,12 +8,11 @@ categories:
   - ai
   - ellmer
   - ollama
-description: "Nebraska R User Group talk given by Dr. Matt Waite."
+description: "Nebraska R User Group talk given by Matt Waite."
 image: "images/hands.jpg"
 draft: false
 ---
 
-On February 18, 2025, [Dr. Matt Waite](https://github.com/mattwaite/) gave the inaugural Nebraska R User Group talk on "Talking to LLMs Through R". Dr. Waite is a professor of practice in the College of Journalism and Mass Communications at the University of Nebraska-Lincoln. He teaches courses in data journalism, data visualization and the application of AI to journalism and storytelling. Here, he has written a blog post summarizing that talk. 
 
 ![[Source: Pexels](https://www.pexels.com/photo/hand-of-a-person-and-a-bionic-hand-6153343/)](images/hands.jpg){fig-alt="Black and silver prosthetic hand reaching out to touch a human hand in the style of Michaelangelo's The Creation of Adam."}
 
