@@ -6,11 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Jeffrey Stevens">
-<meta name="dcterms.date" content="2024-12-06">
-<meta name="description" content="Inaugural Nebraska R User Group talk given by Dr.&nbsp;Heike Hofmann.">
+<meta name="author" content="Matt Waite">
+<meta name="dcterms.date" content="2025-02-24">
+<meta name="description" content="Nebraska R User Group talk given by Dr.&nbsp;Matt Waite.">
 
-<title>Extensions to ggplot2 are easy – right? – Nebraska R User Group</title>
+<title>Talking to LLMs Through R – Nebraska R User Group</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -158,37 +158,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#setting-up-the-data" id="toc-setting-up-the-data" class="nav-link active" data-scroll-target="#setting-up-the-data">Setting up the data</a></li>
-  <li><a href="#extending-ggplot" id="toc-extending-ggplot" class="nav-link" data-scroll-target="#extending-ggplot">Extending ggplot</a></li>
-  <li><a href="#creating-stat-objects-and-functions" id="toc-creating-stat-objects-and-functions" class="nav-link" data-scroll-target="#creating-stat-objects-and-functions">Creating <em>stat</em> objects and functions</a></li>
-  <li><a href="#creating-geom-objects-and-functions" id="toc-creating-geom-objects-and-functions" class="nav-link" data-scroll-target="#creating-geom-objects-and-functions">Creating <em>geom</em> objects and functions</a></li>
-  <li><a href="#bonus-side-effects" id="toc-bonus-side-effects" class="nav-link" data-scroll-target="#bonus-side-effects">Bonus side effects</a></li>
-  <li><a href="#other-extensions" id="toc-other-extensions" class="nav-link" data-scroll-target="#other-extensions">Other extensions</a></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/neb-rug/neb-rug.github.io/edit/main/posts/ggplot2_extensions/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/neb-rug/neb-rug.github.io/blob/main/posts/ggplot2_extensions/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/neb-rug/neb-rug.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Extensions to ggplot2 are easy – right?</h1>
+<h1 class="title">Talking to LLMs Through R</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">extensions</div>
-    <div class="quarto-category">geoms</div>
-    <div class="quarto-category">ggplot2</div>
-    <div class="quarto-category">talk</div>
+    <div class="quarto-category">llms</div>
+    <div class="quarto-category">ai</div>
+    <div class="quarto-category">ellmer</div>
+    <div class="quarto-category">ollama</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    Inaugural Nebraska R User Group talk given by Dr.&nbsp;Heike Hofmann.
+    Nebraska R User Group talk given by Dr.&nbsp;Matt Waite.
   </div>
 </div>
 
@@ -198,14 +187,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Jeffrey Stevens </p>
+             <p>Matt Waite </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">December 6, 2024</p>
+      <p class="date">February 24, 2025</p>
     </div>
   </div>
   
@@ -217,182 +206,93 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>On December 4, <a href="https://github.com/heike">Dr.&nbsp;Heike Hofmann</a> gave the inaugural Nebraska R User Group talk on “Extensions to ggplot2 are easy – right?” (<a href="https://heike.github.io/NebRUG-2024/2024-12-04-ggplot2-extensions/ggplot2-extensions.html">slides</a>). Many of us have used the <a href="https://ggplot2.tidyverse.org/"><code>{ggplot2}</code></a> package to plot our data. But have you ever wanted to create new ways of plotting data that weren’t available? <code>{ggplot2}</code> is extensible, letting you create your own custom plotting functions. Dr.&nbsp;Hofmann walked us through how to do this.</p>
+<p>On February 18, 2025, <a href="https://github.com/mattwaite/">Dr.&nbsp;Matt Waite</a> gave the inaugural Nebraska R User Group talk on “Talking to LLMs Through R”. Dr.&nbsp;Waite is a professor of practice in the College of Journalism and Mass Communications at the University of Nebraska-Lincoln. He teaches courses in data journalism, data visualization and the application of AI to journalism and storytelling. Here, he has written a blog post summarizing that talk.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/heike-hofmann.jpg" class="img-fluid figure-img" alt="Dr. Heike Hofmann standing in front of a wooden podium gesturing with slide titled 'A first extension' in the background."></p>
-<figcaption>Source: Jeff Stevens</figcaption>
+<p><img src="images/hands.jpg" class="img-fluid figure-img" alt="Black and silver prosthetic hand reaching out to touch a human hand in the style of Michaelangelo's The Creation of Adam."></p>
+<figcaption><a href="https://www.pexels.com/photo/hand-of-a-person-and-a-bionic-hand-6153343/">Source: Pexels</a></figcaption>
 </figure>
 </div>
-<p>Here are a few highlights.</p>
-<section id="setting-up-the-data" class="level1">
-<h1>Setting up the data</h1>
-<p>First, we need a good data set to work with. Dr.&nbsp;Hofmann recommended check the <a href="https://github.com/rfordatascience/tidytuesday">#TidyTuesday</a> website for data sets. She chose to use the <a href="https://github.com/rfordatascience/tidytuesday/blob/main/data/2024/2024-10-15/readme.md">Southern Resident Killer Whale Encounters</a> data set, which tracks the location of orcas in the Pacific Northwest’s Salish Sea by the <a href="https://www.whaleresearch.com/encounters">Center for Whale Research</a>.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/orca_cwr.jpg" class="img-fluid figure-img" alt="Black and white orca breaching out of the water"></p>
-<figcaption>Source: <a href="https://www.whaleresearch.com/2024-69">Center for Whale Research</a></figcaption>
-</figure>
-</div>
-<p>Let’s import the data from the #TidyTuesday data repository.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>orcas <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2024/2024-10-15/orcas.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>A quick plot of this data shows the locations of encounters:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>orcas <span class="sc">|&gt;</span> </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> begin_longitude, <span class="at">y =</span> begin_latitude)) <span class="sc">+</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="extending-ggplot" class="level1">
-<h1>Extending ggplot</h1>
-<p>But what if we want to draw a polygon around the perimeter of the data points to show the extent of the area covered by the data? In geometry, this is called a <a href="https://en.wikipedia.org/wiki/Convex_hull">convex hull</a>. There is not a function in <code>{ggplot2}</code> that automatically plots convex hulls. So we need to create our own extension to do this.</p>
-<p>As a reminder, we use <em>geoms</em> to define how data are mapped to physical properties of the plots (e.g., points, lines, polygons, text). So above we used the <code>geom_points()</code> function to map the longitude and latitude data to x- and y-coordinates on our Cartesian coordinate system.</p>
-<p>But for every <em>geom</em> there is a <em>stat</em> that computes statistics on the data before mapping to the plot via the <em>geom</em>. The <em>stat</em> underlying <code>geom_points()</code> is <code>stat_identity()</code>. The “identity” part just means that the raw data is passed directly to the <em>geom</em> (there are no actual computations run on the data).</p>
-<p>Therefore, to create a new type of plotting function, we must create a new <em>geom</em> and a new <em>stat</em>. Fortunately, we don’t have to do these from scratch. We can modify existing <em>geoms</em> and <em>stats</em>. So it makes sense to find the existing <em>geom</em> that is closest to what you want to do, and modify that.</p>
-<p>To plot a convex hull, we must first find the hull, which means finding the points that represent the corners of the hull. So our new plotting function must find a subset of points and then plot a polygon connecting those points.</p>
-</section>
-<section id="creating-stat-objects-and-functions" class="level1">
-<h1>Creating <em>stat</em> objects and functions</h1>
-<p>Before we create a new <em>stat</em> function, we have to create a new <em>stat</em> object that computes the convex hull. Fortunately, there is a function for that (<code>grDevices::chull()</code>) that we can embed in our <em>stat</em> object. So here we use <code>ggproto()</code> to create a new object based on the prototype <em>stat</em> that computes for each group the subset of data points that represent the convex hull.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>StatChull <span class="ot">&lt;-</span> <span class="fu">ggproto</span>(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"StatChull"</span>, Stat,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">required_aes =</span> <span class="fu">c</span>(<span class="st">"x"</span>, <span class="st">"y"</span>),</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">compute_group =</span> <span class="cf">function</span>(data, scales) {</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>     data[<span class="fu">chull</span>(data<span class="sc">$</span>x, data<span class="sc">$</span>y), , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Now we need to create the <em>stat</em> function. Because we need the function to draw a polygon based on the convex hull points, we will use the <code>polygon</code> <em>geom</em> as the base for this function. We include a <code>layer()</code> function and keep most of the rest of the arguments this same to avoid messing up all of the automatic benefits we get of using the <code>polygon</code> <em>geom</em>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>stat_chull <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="cn">NULL</span>, <span class="at">data =</span> <span class="cn">NULL</span>, <span class="at">geom =</span> <span class="st">"polygon"</span>,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">"identity"</span>, <span class="at">na.rm =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">show.legend =</span> <span class="cn">NA</span>,  <span class="at">inherit.aes =</span> <span class="cn">TRUE</span>, ...) {</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layer</span>(</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">stat =</span> StatChull, <span class="at">data =</span> data, <span class="at">mapping =</span> mapping, <span class="at">geom =</span> geom, </span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> position, <span class="at">show.legend =</span> show.legend, </span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">inherit.aes =</span> inherit.aes, <span class="at">params =</span> <span class="fu">list</span>(<span class="at">na.rm =</span> na.rm, ...)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>We can now use our new <code>stat_chull()</code> function two draw the convex hull around the data.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>orcas <span class="sc">|&gt;</span> </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> begin_longitude, <span class="at">y =</span> begin_latitude)) <span class="sc">+</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_chull</span>() <span class="sc">+</span> </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>We have drawn a convex hull! But the fill and transparency defaults aren’t great. Fortunately, we can pass standard aesthetic arguments to the function to control line color and polygon fill and transparency.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>orcas <span class="sc">|&gt;</span> </span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> begin_longitude, <span class="at">y =</span> begin_latitude)) <span class="sc">+</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_chull</span>(<span class="at">fill=</span><span class="st">"grey60"</span>, <span class="at">colour =</span> <span class="st">"grey30"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span> </span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="creating-geom-objects-and-functions" class="level1">
-<h1>Creating <em>geom</em> objects and functions</h1>
-<p>But if we want to set different defaults from the original <em>geom</em> (in this case <code>polygon</code>), we also need to set up our own <em>geom</em> object and function. We will create a new <em>geom</em> object called <code>GeomChull</code> based on the prototype object <code>GeomPolygon</code>. Then we’ll define new aesthetic defaults.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>GeomChull <span class="ot">&lt;-</span> <span class="fu">ggproto</span>(</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"GeomChull"</span>, GeomPolygon,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">default_aes =</span> ggplot2<span class="sc">::</span><span class="fu">aes</span>(</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"grey30"</span>, <span class="at">fill =</span> <span class="st">"grey50"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="co"># new ones</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth=</span><span class="fl">0.5</span>, <span class="at">linetype =</span> <span class="dv">1</span>, <span class="at">subgroup=</span><span class="cn">NULL</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>With the new <em>geom</em> object in place, we need to create a new <em>geom</em> function that uses the <code>chull</code> stat that we created and the <code>GeomChull</code> object.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>geom_chull <span class="ot">&lt;-</span> <span class="cf">function</span> (<span class="at">mapping =</span> <span class="cn">NULL</span>, <span class="at">data =</span> <span class="cn">NULL</span>, </span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">stat =</span> <span class="st">"chull"</span>, <span class="at">position =</span> <span class="st">"identity"</span>, </span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">rule =</span> <span class="st">"evenodd"</span>, ..., <span class="at">na.rm =</span> <span class="cn">FALSE</span>, <span class="at">show.legend =</span> <span class="cn">NA</span>, <span class="at">inherit.aes =</span> <span class="cn">TRUE</span>) </span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">layer</span>(<span class="at">data =</span> data, <span class="at">mapping =</span> mapping, <span class="at">stat =</span> stat, </span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">geom =</span> GeomChull, <span class="at">position =</span> position, </span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">show.legend =</span> show.legend, <span class="at">inherit.aes =</span> inherit.aes, </span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">params =</span> <span class="fu">list</span>(<span class="at">na.rm =</span> na.rm, <span class="at">rule =</span> rule, ...))</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Now we can use <code>geom_chull()</code> instead of <code>stat_chull()</code> and we have a new set of default aesthetics.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>orcas <span class="sc">|&gt;</span> </span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> begin_longitude, <span class="at">y =</span> begin_latitude)) <span class="sc">+</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_chull</span>() <span class="sc">+</span> </span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="bonus-side-effects" class="level1">
-<h1>Bonus side effects</h1>
-<p>Again, because we left so many of the arguments the same, we can do cool things like automatically have the function apply to facets.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>orcas <span class="sc">|&gt;</span> </span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> begin_longitude, <span class="at">y =</span> begin_latitude)) <span class="sc">+</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_chull</span>() <span class="sc">+</span> </span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>lubridate<span class="sc">::</span><span class="fu">month</span>(date))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Or apply the function to groups.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>orcas <span class="sc">|&gt;</span> </span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> begin_longitude, <span class="at">y =</span> begin_latitude, </span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">colour =</span> year, <span class="at">group =</span> year)) <span class="sc">+</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_chull</span>() <span class="sc">+</span> </span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="other-extensions" class="level1">
-<h1>Other extensions</h1>
-<p>See—we told you extensions to ggplot2 would be easy – right? For other ggplot2 extensions that folks have created, check out the <a href="https://exts.ggplot2.tidyverse.org/gallery/">ggplot2 extensions gallery</a>, which includes extensions such as <a href="https://github.com/haleyjeppson/ggmosaic"><code>{ggmosaic}</code></a>, <a href="https://heike.github.io/ggpcp/"><code>{ggpcp}</code></a>, and <a href="https://github.com/slowkow/ggrepel"><code>{ggrepel}</code></a> just to name a few!</p>
+<p>Like LLMs themselves, there’s been a ton of development around packages that connect R to your favorite LLM. To give you an example of how fast it’s changing — I had some code working with local LLMs and Google’s Gemini platform that gave me the confidence to pitch a talk to NE-RUG. When it came time to give that talk, a month later, I dusted off that code and all of the libraries I had used had changed, been renamed or disappeared entirely.</p>
+<p>So things are moving fast.</p>
+<p>Fortunately, some libraries have come along that are supported by big players and look to be here for the long haul. Specifically, the library I’m going to make use of here is <a href="https://ellmer.tidyverse.org/"><code>{ellmer}</code></a> from the folks who brought you the <a href="https://www.tidyverse.org/"><code>{tidyverse}</code></a>.</p>
+<p>The beauty of <code>{ellmer}</code> is that it gives you a more standardized interface to the blizzard of commercial LLM APIs as well as the same interface to locally hosted LLMs through <a href="https://ollama.com/">Ollama</a>. In my personal work, I like having Ollama running to test ideas out without worrying about running up a bill at OpenAI, Anthropic, Google, etc. Google also offers a free tier for access to their Gemini models, which is fantastic if you are doing a limited number of things, or know how to throttle your needs to stay below their usage limits.</p>
+<p>All you need for the Gemini free tier is <a href="https://ai.google.dev/gemini-api/docs/api-key">to get an API key with your Google account</a>. The ellmer documentation will tell you how to store it locally for easier access. And once you have that set up, you can do silly things like this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ellmer)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>chat <span class="ot">&lt;-</span> <span class="fu">chat_gemini</span>()</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>chat<span class="sc">$</span><span class="fu">chat</span>(<span class="st">"Tell me three jokes about journalists"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The output will tell you everything you need to know about how well LLMs understand humor. I won’t spoil it by posting it here.</p>
+<p>That’s it. That’s all it takes to talk to an LLM. Want to talk to a locally hosted model?</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>chat <span class="ot">&lt;-</span> <span class="fu">chat_ollama</span>(<span class="at">model =</span> <span class="st">"llama3.2"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>chat<span class="sc">$</span><span class="fu">chat</span>(<span class="st">"Tell me three jokes about journalists"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For me, the easy part is always the hello world example like this. The hard part is now applying it to something I need to get done. And if you’ve worked with LLMs, this is where you <em>really</em> find the limitations of them. The demo is always amazing. The reality is always less so.</p>
+<p>As a data analyst, the dream of anyone who has had to laboriously clean up data has always been to find some way to make a computer do it for you. For the last 25 years I’ve been working with data, I’ve got my trunk of tools to slice and dice poorly normalized text columns to try and make them useful. But like any good 80/20 problem, all the tricks in the world run out at some point and you’re left cleaning up 20 percent of the crap by hand. And it’s boring and it sucks and I hate it.</p>
+<p>Of course the first thing I thought about throwing at the alien intelligence now living on my computer was a horrible job of cleaning up terrible data.</p>
+<p>The State of Nebraska’s Department of Corrections <a href="https://dcs-inmatesearch.ne.gov/Corrections/COR_input.jsp">provides a dataset of every currently incarcerated person in the state system</a>. There’s two tables — the inmate record and the charges they are being held on. There’s about 7,800 inmates serving time on about 21,000 charges. There are 4,800 unique charges in that table … and there are not 4,800 criminal offenses in state law.</p>
+<p>It’s clear from the data that humans with zero guidance are creating the offense description field. Asking the question “how many people are currently serving time on a methamphetamine related charge” will show you just what a nightmare this data is. Here’s a few examples:</p>
+<pre><code>POS CNTRL SUB-METHAMPHETAMINE  
+POSSESSION OF METHAMPHETAMINE
+POS CNTRL SUB (METH)
+POSSESS CONTR SUBSTANCE-METH
+DELIVERY OF METHAMPHETAMINE
+POSS W/ INTENT DIST METH</code></pre>
+<p>What can you even do with that? Answer: structured output queries to LLMs. Most of the LLM models out there now will support structured output (usually JSON) and <code>{ellmer}</code> makes it easy to turn those into R objects you’re used to working with.</p>
+<p>Here’s an example of a zero shot query to Gemini that is relying on the names of the columns alone to extract meaning:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>chat <span class="ot">&lt;-</span> <span class="fu">chat_gemini</span>()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>chat<span class="sc">$</span><span class="fu">extract_data</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"POSS W/ INTENT DIST METH"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="fu">type_object</span>(</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">methamphetamine_related =</span> <span class="fu">type_boolean</span>(),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">possession_related =</span> <span class="fu">type_boolean</span>(),</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">distribution_related =</span> <span class="fu">type_boolean</span>(),</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">fully_spelled_out_no_abbreviations =</span> <span class="fu">type_string</span>()</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>I’m asking it to take the phrase “POSS W/ INTENT DIST METH” and tell me if it’s meth related, if it’s possession related, if it’s distribution related and then fully spell out the charge. Here’s what Gemini comes back with:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Using model <span class="ot">=</span> <span class="st">"gemini-1.5-flash"</span>.</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span>methamphetamine_related</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="cn">TRUE</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span>possession_related</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="cn">TRUE</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span>distribution_related</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="cn">TRUE</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span>fully_spelled_out_no_abbreviations</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"Possession With Intent To Distribute Methamphetamine"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>{ellmer}</code> has a method of adding a system prompt — which goes with each query — that you can add all kinds of context and goal setting to. For example, instead of just shotgunning this out and praying Gemini infers what I mean, I can add this:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>chat <span class="ot">&lt;-</span> <span class="fu">chat_gemini</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">system_prompt =</span> <span class="st">"You are a data entry clerk normalizing some bad data. The data you </span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="st">    are working with are criminal charges that current prison inmates are serving time </span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="st">    for. Your job is to help normalize the name of the charge by spelling out all of </span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="st">    the words, eliminating the abbreviations. Please use all lowercase letters. Here's </span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="st">    a lexicon of terms you will see in the data to help you. Rarely will these be the </span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="st">    only thing in the charge. These are abbreviations in a greater whole: </span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="st">    PWID = possession with intent to deliver. POS = possession. CNTL = controlled. </span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="st">    SUB = substance. VOP = violation of probation. FEL = felony. POSS = possession. </span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="st">    METH = methamphetamine. Spelling out methamphetamine is very important."</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>chat<span class="sc">$</span><span class="fu">extract_data</span>(</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"POSS W/ INTENT DIST METH"</span>,</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="fu">type_object</span>(</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">methamphetamine_related =</span> <span class="fu">type_boolean</span>(),</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">possession_related =</span> <span class="fu">type_boolean</span>(),</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">distribution_related =</span> <span class="fu">type_boolean</span>(),</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">fully_spelled_out_no_abbreviations =</span> <span class="fu">type_string</span>()</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>I’m still testing this out with the full dataset and using only locally hosted models, so I can’t say yet how well it works. But in testing, it’s very good. I tested 100 records and 99 of them were correct. I’m now working on how to set up multiple LLMs to try it and then compare the results to each other to see if I can create a consensus opinion on each row.</p>
+<p>It’s bonkers to me that last year, the best I could do with this data was throw 30 undergraduate data journalism students at the problem and hope for the best. In a very short time, with a maturing set of tools and a little bit of creativity, the dream of a competent and tireless data assistant is starting to take shape.</p>
+<p>For another example of using LLMs to aid in creating data maps, check out <a href="https://mattwaite.github.io/posts/a-simple-example-ai-agents-doing-journalism/">A simple example of AI agents(?) doing journalism(?) work</a>.</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -964,7 +864,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/neb-rug/neb-rug.github.io/edit/main/posts/ggplot2_extensions/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/neb-rug/neb-rug.github.io/blob/main/posts/ggplot2_extensions/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/neb-rug/neb-rug.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions"><ul><li><a href="https://github.com/neb-rug/neb-rug.github.io/edit/main/posts/talking_to_llms/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/neb-rug/neb-rug.github.io/blob/main/posts/talking_to_llms/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/neb-rug/neb-rug.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

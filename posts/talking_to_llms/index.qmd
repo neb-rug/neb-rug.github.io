@@ -1,0 +1,135 @@
+---
+title: 'Talking to LLMs Through R'
+author:
+  - Matt Waite
+date: '2025-02-24'
+categories:
+  - llms
+  - ai
+  - ellmer
+  - ollama
+description: "Nebraska R User Group talk given by Dr. Matt Waite."
+image: "images/hands.jpg"
+draft: false
+---
+
+On February 18, 2025, [Dr. Matt Waite](https://github.com/mattwaite/) gave the inaugural Nebraska R User Group talk on "Talking to LLMs Through R". Dr. Waite is a professor of practice in the College of Journalism and Mass Communications at the University of Nebraska-Lincoln. He teaches courses in data journalism, data visualization and the application of AI to journalism and storytelling. Here, he has written a blog post summarizing that talk. 
+
+![[Source: Pexels](https://www.pexels.com/photo/hand-of-a-person-and-a-bionic-hand-6153343/)](images/hands.jpg){fig-alt="Black and silver prosthetic hand reaching out to touch a human hand in the style of Michaelangelo's The Creation of Adam."}
+
+
+Like LLMs themselves, there’s been a ton of development around packages that connect R to your favorite LLM. To give you an example of how fast it’s changing — I had some code working with local LLMs and Google’s Gemini platform that gave me the confidence to pitch a talk to NE-RUG. When it came time to give that talk, a month later, I dusted off that code and all of the libraries I had used had changed, been renamed or disappeared entirely. 
+
+So things are moving fast. 
+
+Fortunately, some libraries have come along that are supported by big players and look to be here for the long haul. Specifically, the library I’m going to make use of here is [`{ellmer}`](https://ellmer.tidyverse.org/) from the folks who brought you the [`{tidyverse}`](https://www.tidyverse.org/). 
+
+The beauty of `{ellmer}` is that it gives you a more standardized interface to the blizzard of commercial LLM APIs as well as the same interface to locally hosted LLMs through [Ollama](https://ollama.com/). In my personal work, I like having Ollama running to test ideas out without worrying about running up a bill at OpenAI, Anthropic, Google, etc. Google also offers a free tier for access to their Gemini models, which is fantastic if you are doing a limited number of things, or know how to throttle your needs to stay below their usage limits. 
+
+All you need for the Gemini free tier is [to get an API key with your Google account](https://ai.google.dev/gemini-api/docs/api-key). The ellmer documentation will tell you how to store it locally for easier access. And once you have that set up, you can do silly things like this:
+
+```r
+library(ellmer)
+
+chat <- chat_gemini()
+
+chat$chat("Tell me three jokes about journalists")
+```
+
+The output will tell you everything you need to know about how well LLMs understand humor. I won’t spoil it by posting it here. 
+
+That’s it. That’s all it takes to talk to an LLM. Want to talk to a locally hosted model? 
+
+```r
+chat <- chat_ollama(model = "llama3.2")
+
+chat$chat("Tell me three jokes about journalists")
+```
+
+For me, the easy part is always the hello world example like this. The hard part is now applying it to something I need to get done. And if you’ve worked with LLMs, this is where you *really* find the limitations of them. The demo is always amazing. The reality is always less so. 
+
+As a data analyst, the dream of anyone who has had to laboriously clean up data has always been to find some way to make a computer do it for you. For the last 25 years I’ve been working with data, I’ve got my trunk of tools to slice and dice poorly normalized text columns to try and make them useful. But like any good 80/20 problem, all the tricks in the world run out at some point and you’re left cleaning up 20 percent of the crap by hand. And it’s boring and it sucks and I hate it. 
+
+Of course the first thing I thought about throwing at the alien intelligence now living on my computer was a horrible job of cleaning up terrible data. 
+
+The State of Nebraska’s Department of Corrections [provides a dataset of every currently incarcerated person in the state system](https://dcs-inmatesearch.ne.gov/Corrections/COR_input.jsp). There’s two tables — the inmate record and the charges they are being held on. There’s about 7,800 inmates serving time on about 21,000 charges. There are 4,800 unique charges in that table … and there are not 4,800 criminal offenses in state law. 
+
+It’s clear from the data that humans with zero guidance are creating the offense description field.  Asking the question “how many people are currently serving time on a methamphetamine related charge” will show you just what a nightmare this data is. Here’s a few examples:
+
+```
+POS CNTRL SUB-METHAMPHETAMINE  
+POSSESSION OF METHAMPHETAMINE
+POS CNTRL SUB (METH)
+POSSESS CONTR SUBSTANCE-METH
+DELIVERY OF METHAMPHETAMINE
+POSS W/ INTENT DIST METH
+```
+
+What can you even do with that? Answer: structured output queries to LLMs. Most of the LLM models out there now will support structured output (usually JSON) and `{ellmer}` makes it easy to turn those into R objects you’re used to working with. 
+
+Here’s an example of a zero shot query to Gemini that is relying on the names of the columns alone to extract meaning:
+
+```r
+chat <- chat_gemini()
+
+chat$extract_data(
+  "POSS W/ INTENT DIST METH",
+  type = type_object(
+    methamphetamine_related = type_boolean(),
+    possession_related = type_boolean(),
+    distribution_related = type_boolean(),
+    fully_spelled_out_no_abbreviations = type_string()
+  )
+)
+```
+
+I’m asking it to take the phrase "POSS W/ INTENT DIST METH" and tell me if it’s meth related, if it’s possession related, if it’s distribution related and then fully spell out the charge. Here’s what Gemini comes back with:
+
+```r
+Using model = "gemini-1.5-flash".
+
+$methamphetamine_related
+[1] TRUE
+
+$possession_related
+[1] TRUE
+
+$distribution_related
+[1] TRUE
+
+$fully_spelled_out_no_abbreviations
+[1] "Possession With Intent To Distribute Methamphetamine"
+```
+
+`{ellmer}` has a method of adding a system prompt — which goes with each query — that you can add all kinds of context and goal setting to. For example, instead of just shotgunning this out and praying Gemini infers what I mean, I can add this:
+
+```r
+chat <- chat_gemini(
+	system_prompt = "You are a data entry clerk normalizing some bad data. The data you 
+	are working with are criminal charges that current prison inmates are serving time 
+	for. Your job is to help normalize the name of the charge by spelling out all of 
+	the words, eliminating the abbreviations. Please use all lowercase letters. Here's 
+	a lexicon of terms you will see in the data to help you. Rarely will these be the 
+	only thing in the charge. These are abbreviations in a greater whole: 
+	PWID = possession with intent to deliver. POS = possession. CNTL = controlled. 
+	SUB = substance. VOP = violation of probation. FEL = felony. POSS = possession. 
+	METH = methamphetamine. Spelling out methamphetamine is very important."
+	)
+
+chat$extract_data(
+  "POSS W/ INTENT DIST METH",
+  type = type_object(
+    methamphetamine_related = type_boolean(),
+    possession_related = type_boolean(),
+    distribution_related = type_boolean(),
+    fully_spelled_out_no_abbreviations = type_string()
+  )
+)
+```
+
+I’m still testing this out with the full dataset and using only locally hosted models, so I can’t say yet how well it works. But in testing, it’s very good. I tested 100 records and 99 of them were correct. I’m now working on how to set up multiple LLMs to try it and then compare the results to each other to see if I can create a consensus opinion on each row. 
+
+It’s bonkers to me that last year, the best I could do with this data was throw 30 undergraduate data journalism students at the problem and hope for the best. In a very short time, with a maturing set of tools and a little bit of creativity, the dream of a competent and tireless data assistant is starting to take shape. 
+
+For another example of using LLMs to aid in creating data maps, check out [A simple example of AI agents(?) doing journalism(?) work](https://mattwaite.github.io/posts/a-simple-example-ai-agents-doing-journalism/).
+
