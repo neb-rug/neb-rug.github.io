@@ -24,7 +24,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://neb-rug.github.io/posts/talking_to_llms/images/hands.jpg" class="img-fluid figure-img" alt="Black and silver prosthetic hand reaching out to touch a human hand in the style of Michaelangelo's The Creation of Adam."></p>
-<figcaption><a href="https://www.pexels.com/photo/hand-of-a-person-and-a-bionic-hand-6153343/">Source: Pexels</a></figcaption>
+<figcaption><a href="https://www.pexels.com/photo/hand-of-a-person-and-a-bionic-hand-6153343/">Source: cottonbro studio on Pexels</a></figcaption>
 </figure>
 </div>
 <p>Like LLMs themselves, there’s been a ton of development around packages that connect R to your favorite LLM. To give you an example of how fast it’s changing — I had some code working with local LLMs and Google’s Gemini platform that gave me the confidence to pitch a talk to NE-RUG. When it came time to give that talk, a month later, I dusted off that code and all of the libraries I had used had changed, been renamed or disappeared entirely.</p>

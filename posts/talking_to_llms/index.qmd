@@ -15,7 +15,7 @@ draft: false
 
 On February 18, 2025, [Matt Waite](https://github.com/mattwaite/) gave a Nebraska R User Group presentation on "Talking to LLMs Through R". Matt Waite is a professor of practice in the College of Journalism and Mass Communications at the University of Nebraska-Lincoln. He teaches courses in data journalism, data visualization and the application of AI to journalism and storytelling. Here, he has written a blog post summarizing that talk. 
 
-![[Source: Pexels](https://www.pexels.com/photo/hand-of-a-person-and-a-bionic-hand-6153343/)](images/hands.jpg){fig-alt="Black and silver prosthetic hand reaching out to touch a human hand in the style of Michaelangelo's The Creation of Adam."}
+![[Source: cottonbro studio on Pexels](https://www.pexels.com/photo/hand-of-a-person-and-a-bionic-hand-6153343/)](images/hands.jpg){fig-alt="Black and silver prosthetic hand reaching out to touch a human hand in the style of Michaelangelo's The Creation of Adam."}
 
 
 Like LLMs themselves, there’s been a ton of development around packages that connect R to your favorite LLM. To give you an example of how fast it’s changing — I had some code working with local LLMs and Google’s Gemini platform that gave me the confidence to pitch a talk to NE-RUG. When it came time to give that talk, a month later, I dusted off that code and all of the libraries I had used had changed, been renamed or disappeared entirely. 
