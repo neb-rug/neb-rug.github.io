@@ -14,25 +14,32 @@
     "text": "All Neb-RUG events are posted on our Meetup page. Join now to receive invites to future events!"
   },
   {
-    "objectID": "events.html#talking-to-llms-through-r-by-dr.-matt-waite",
-    "href": "events.html#talking-to-llms-through-r-by-dr.-matt-waite",
+    "objectID": "events.html#creating-beautiful-pdfs-via-htmlcssjs-by-dr.-yihui-xie",
+    "href": "events.html#creating-beautiful-pdfs-via-htmlcssjs-by-dr.-yihui-xie",
     "title": "Events",
-    "section": "Talking to LLMs Through R by Dr. Matt Waite",
-    "text": "Talking to LLMs Through R by Dr. Matt Waite\n\n4:00-5:30pm, Tuesday, February 18th\nCenter for Brain, Biology & Behavior, University of Nebraska-Lincoln"
+    "section": "Creating Beautiful PDFs via HTML/CSS/JS by Dr. Yihui Xie",
+    "text": "Creating Beautiful PDFs via HTML/CSS/JS by Dr. Yihui Xie\n\n1:00-2:00pm, Wednesday, April 9th\nAnimal Science Complex A128, University of Nebraska-Lincoln"
+  },
+  {
+    "objectID": "events.html#talking-to-llms-through-r-by-matt-waite",
+    "href": "events.html#talking-to-llms-through-r-by-matt-waite",
+    "title": "Events",
+    "section": "Talking to LLMs Through R by Matt Waite",
+    "text": "Talking to LLMs Through R by Matt Waite\n\n4:00-5:30pm, Tuesday, February 18th\nCenter for Brain, Biology & Behavior, University of Nebraska-Lincoln\nBlogpost"
   },
   {
     "objectID": "events.html#extensions-to-ggplot2-are-easy-right-by-dr.-heike-hofmann",
     "href": "events.html#extensions-to-ggplot2-are-easy-right-by-dr.-heike-hofmann",
     "title": "Events",
     "section": "Extensions to ggplot2 are easy – right? by Dr. Heike Hofmann",
-    "text": "Extensions to ggplot2 are easy – right? by Dr. Heike Hofmann\n\n4:30-6:00pm, Wednesday, December 4th\nNebraska East Union, University of Nebraska-Lincoln\nSlides (html pdf)"
+    "text": "Extensions to ggplot2 are easy – right? by Dr. Heike Hofmann\n\n4:30-6:00pm, Wednesday, December 4th\nNebraska East Union, University of Nebraska-Lincoln\nSlides (html pdf)\nBlogpost"
   },
   {
     "objectID": "events.html#nebraska-r-user-group-kickoff-meeting",
     "href": "events.html#nebraska-r-user-group-kickoff-meeting",
     "title": "Events",
     "section": "Nebraska R User Group Kickoff Meeting",
-    "text": "Nebraska R User Group Kickoff Meeting\n\n4-5:30pm, Tuesday, October 29th\nCenter for Brain, Biology & Behavior, University of Nebraska-Lincoln"
+    "text": "Nebraska R User Group Kickoff Meeting\n\n4-5:30pm, Tuesday, October 29th\nCenter for Brain, Biology & Behavior, University of Nebraska-Lincoln\nR Consortium blogpost"
   },
   {
     "objectID": "posts/ggplot2_extensions/index.html",
