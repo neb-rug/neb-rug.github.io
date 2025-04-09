@@ -8,6 +8,7 @@ All Neb-RUG events are posted on our [Meetup page](https://www.meetup.com/neb-ru
 ## [Creating Beautiful PDFs via HTML/CSS/JS by Dr. Yihui Xie](https://www.meetup.com/neb-rug/events/306923229/)
 * 1:00-2:00pm, Wednesday, April 9th
 * [Animal Science Complex A128](https://maps.unl.edu/ANSC), University of Nebraska-Lincoln
+* [Slides](https://slides.yihui.org/2025-pages-litedown.html)
 
 
 ## [Talking to LLMs Through R by Matt Waite](https://www.meetup.com/neb-rug/events/305756231/)

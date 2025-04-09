@@ -19,8 +19,8 @@ class_cal
 full_cal |>  
   filter(category!="NA") |> 
   select(date) |> 
-  mutate(title = c("Meetup", "Extensions to ggplot2 are easy – right?", "Talking to LLMs Through R"),
-         speaker = c("", "[Heike Hofmann](https://github.com/heike)", "[Matt Waite](https://github.com/mattwaite)"),
-         link = c("", "[html](https://heike.github.io/NebRUG-2024/2024-12-04-ggplot2-extensions/ggplot2-extensions.html), [pdf](https://heike.github.io/NebRUG-2024/2024-12-04-ggplot2-extensions/ggplot2-extensions.pdf)", "")) |> 
+  mutate(title = c("Meetup", "Extensions to ggplot2 are easy – right?", "Talking to LLMs Through R", "Creating Beautiful PDFs via HTML/CSS/JS"),
+         speaker = c("", "[Heike Hofmann](https://github.com/heike)", "[Matt Waite](https://github.com/mattwaite)", "[Yihui Xie](https://yihui.org/)"),
+         link = c("", "[html](https://heike.github.io/NebRUG-2024/2024-12-04-ggplot2-extensions/ggplot2-extensions.html), [pdf](https://heike.github.io/NebRUG-2024/2024-12-04-ggplot2-extensions/ggplot2-extensions.pdf)", "", "[slides](https://slides.yihui.org/2025-pages-litedown.html")) |> 
   knitr::kable(col.names = c("Date", "Title", "Speaker", "Slides"))
 ```

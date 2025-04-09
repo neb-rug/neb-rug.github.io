@@ -6,7 +6,7 @@ library(tidyverse)
 
 meetup_dates <- c(ymd(20241029))
 
-talk_dates <- c(ymd(20241204, 20250218))
+talk_dates <- c(ymd(20241204, 20250218, 20250409))
 
 # What are the full dates of the semester? Here, I'll exclude exam week as I like to do.
 # In this case: 6 January to 23 April
