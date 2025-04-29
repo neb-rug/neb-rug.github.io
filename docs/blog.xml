@@ -9,13 +9,14 @@
 <link>https://neb-rug.github.io/blog.html</link>
 <atom:link href="https://neb-rug.github.io/blog.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.6.40</generator>
+<generator>quarto-1.7.29</generator>
 <lastBuildDate>Mon, 24 Feb 2025 06:00:00 GMT</lastBuildDate>
 <item>
   <title>Talking to LLMs Through R</title>
   <dc:creator>Matt Waite</dc:creator>
   <link>https://neb-rug.github.io/posts/talking_to_llms/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -256,6 +257,7 @@ font-style: inherit;">type_string</span>()</span>
   <dc:creator>Jeffrey Stevens</dc:creator>
   <link>https://neb-rug.github.io/posts/ggplot2_extensions/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -774,6 +776,7 @@ font-style: inherit;">geom_point</span>() </span></code></pre></div>
   <dc:creator>Jeffrey Stevens</dc:creator>
   <link>https://neb-rug.github.io/posts/welcome/welcome.html</link>
   <description><![CDATA[ 
+
 
 
 
