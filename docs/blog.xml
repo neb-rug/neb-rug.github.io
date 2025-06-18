@@ -9,7 +9,7 @@
 <link>https://neb-rug.github.io/blog.html</link>
 <atom:link href="https://neb-rug.github.io/blog.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.6.42</generator>
+<generator>quarto-1.7.31</generator>
 <lastBuildDate>Tue, 06 May 2025 05:00:00 GMT</lastBuildDate>
 <item>
   <title>Failing upward with R</title>
@@ -488,7 +488,7 @@ font-style: inherit;">here</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">here</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="st" style="color: #20794D;
 background-color: null;
@@ -680,6 +680,7 @@ Figure&nbsp;9: The level of pain inflicted if something goes wrong
   <dc:creator>Matt Waite</dc:creator>
   <link>https://neb-rug.github.io/posts/talking_to_llms/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -920,6 +921,7 @@ font-style: inherit;">type_string</span>()</span>
   <dc:creator>Jeffrey Stevens</dc:creator>
   <link>https://neb-rug.github.io/posts/ggplot2_extensions/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -1438,6 +1440,7 @@ font-style: inherit;">geom_point</span>() </span></code></pre></div>
   <dc:creator>Jeffrey Stevens</dc:creator>
   <link>https://neb-rug.github.io/posts/welcome/welcome.html</link>
   <description><![CDATA[ 
+
 
 
 

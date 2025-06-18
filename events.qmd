@@ -8,6 +8,7 @@ All Neb-RUG events are posted on our [Meetup page](https://www.meetup.com/neb-ru
 ## [Failing Upward with R by Dr. Collin Berke](https://www.meetup.com/neb-rug/events/307409136)
 * 3:30-4:30pm, Tuesday, May 6th
 * [Center for Brain, Biology & Behavior](https://cb3.unl.edu), University of Nebraska-Lincoln
+* [Blogpost](posts/failing_upward_r/index.qmd)
 
 ## [Creating Beautiful PDFs via HTML/CSS/JS by Dr. Yihui Xie](https://www.meetup.com/neb-rug/events/306923229/)
 * 1:00-2:00pm, Wednesday, April 9th
