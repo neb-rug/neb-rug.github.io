@@ -1,0 +1,15 @@
+title: Presentations
+author: Collin K. Berke, Ph.D.
+quarto-required: ">=1.2.0"
+contributes:
+  formats:
+    revealjs:
+      theme: [default, theme.scss]
+      incremental: true
+      code-link: true
+      code-copy: true
+      controls: true
+      embed-resources: true
+execute:
+  eval: true
+  echo: true
