@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="Collin K. Berke, Ph.D.">
+<meta name="dcterms.date" content="2025-05-06">
+<meta name="description" content="Challenges faced and hard truths learned by a small but scrappy data team on their journey to have an impact">
+<title>Failing upward with R – Nebraska R User Group</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b53751a350365c71b6c909e95f209ed1.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-6f9dfbde79519b5b40606ee364c210d2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-c150bfb3e0e14764c6bd046c7b4a814e.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><link rel="stylesheet" href="../../styles.css">
+</head>
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Nebraska R User Group</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../events.html"> 
+<span class="menu-text">Events</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+<ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/neb-rug/neb-rug.github.io"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+</div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+   
+  <ul>
+<li><a href="#background" id="toc-background" class="nav-link active" data-scroll-target="#background">Background</a></li>
+  <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation">Motivation</a></li>
+  <li>
+<a href="#hard-lessons-learned" id="toc-hard-lessons-learned" class="nav-link" data-scroll-target="#hard-lessons-learned">Hard lessons learned</a>
+  <ul class="collapse">
+<li>
+<a href="#have-a-vision-of-where-youre-going" id="toc-have-a-vision-of-where-youre-going" class="nav-link" data-scroll-target="#have-a-vision-of-where-youre-going">Have a vision of where you’re going</a>
+  <ul class="collapse">
+<li><a href="#be-useful" id="toc-be-useful" class="nav-link" data-scroll-target="#be-useful">Be useful</a></li>
+  <li><a href="#keep-the-ideal-state-and-end-in-mind" id="toc-keep-the-ideal-state-and-end-in-mind" class="nav-link" data-scroll-target="#keep-the-ideal-state-and-end-in-mind">Keep the ideal state and end in mind</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#use-a-guide-follow-those-who-went-before-you" id="toc-use-a-guide-follow-those-who-went-before-you" class="nav-link" data-scroll-target="#use-a-guide-follow-those-who-went-before-you">Use a guide: Follow those who went before you</a>
+  <ul class="collapse">
+<li><a href="#dont-go-it-alone" id="toc-dont-go-it-alone" class="nav-link" data-scroll-target="#dont-go-it-alone">Don’t go it alone</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#adversity-is-unavoidable-so-identify-ways-to-make-work-more-enjoyable" id="toc-adversity-is-unavoidable-so-identify-ways-to-make-work-more-enjoyable" class="nav-link" data-scroll-target="#adversity-is-unavoidable-so-identify-ways-to-make-work-more-enjoyable">Adversity is unavoidable, so identify ways to make work more enjoyable</a>
+  <ul class="collapse">
+<li><a href="#the-environments-you-work-in-may-not-be-set-up-for-data-science-work" id="toc-the-environments-you-work-in-may-not-be-set-up-for-data-science-work" class="nav-link" data-scroll-target="#the-environments-you-work-in-may-not-be-set-up-for-data-science-work">The environments you work in may not be set up for data science work</a></li>
+  <li><a href="#use-what-you-know-to-make-things-better" id="toc-use-what-you-know-to-make-things-better" class="nav-link" data-scroll-target="#use-what-you-know-to-make-things-better">Use what you know to make things better</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#have-a-plan-know-where-youre-going-roughly" id="toc-have-a-plan-know-where-youre-going-roughly" class="nav-link" data-scroll-target="#have-a-plan-know-where-youre-going-roughly">Have a plan, know where you’re going (roughly)</a>
+  <ul class="collapse">
+<li><a href="#make-tough-choices-about-project-structure-as-early-as-possible" id="toc-make-tough-choices-about-project-structure-as-early-as-possible" class="nav-link" data-scroll-target="#make-tough-choices-about-project-structure-as-early-as-possible">Make tough choices about project structure as early as possible</a></li>
+  <li><a href="#create-waypoints-to-know-if-youre-on-the-right-path" id="toc-create-waypoints-to-know-if-youre-on-the-right-path" class="nav-link" data-scroll-target="#create-waypoints-to-know-if-youre-on-the-right-path">Create waypoints to know if you’re on the right path</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#know-when-to-pivot-when-you-get-lost" id="toc-know-when-to-pivot-when-you-get-lost" class="nav-link" data-scroll-target="#know-when-to-pivot-when-you-get-lost">Know when to pivot when you get lost</a>
+  <ul class="collapse">
+<li><a href="#not-all-shiny-things-are-useful-or-needed" id="toc-not-all-shiny-things-are-useful-or-needed" class="nav-link" data-scroll-target="#not-all-shiny-things-are-useful-or-needed">Not all shiny things are useful or needed</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#take-others-along-on-your-journey" id="toc-take-others-along-on-your-journey" class="nav-link" data-scroll-target="#take-others-along-on-your-journey">Take others along on your journey</a>
+  <ul class="collapse">
+<li><a href="#be-where-your-audience-is" id="toc-be-where-your-audience-is" class="nav-link" data-scroll-target="#be-where-your-audience-is">Be where your audience is</a></li>
+  <li><a href="#be-a-human" id="toc-be-a-human" class="nav-link" data-scroll-target="#be-a-human">Be a human</a></li>
+  </ul>
+</li>
+  </ul>
+</li>
+  <li><a href="#wrap-up" id="toc-wrap-up" class="nav-link" data-scroll-target="#wrap-up">Wrap up</a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/neb-rug/neb-rug.github.io/edit/main/posts/failing_upward_r/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/neb-rug/neb-rug.github.io/blob/main/posts/failing_upward_r/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/neb-rug/neb-rug.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">Failing upward with R</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">r</div>
+    <div class="quarto-category">workflows</div>
+    <div class="quarto-category">packages</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Challenges faced and hard truths learned by a small but scrappy data team on their journey to have an impact
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Collin K. Berke, Ph.D. </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 6, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header><div class="quarto-figure quarto-figure-center">
+<figure class="figure"><div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="images/thumbnail-wide.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Photo by Tom Swinnen"><img src="images/thumbnail-wide.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Photo by Tom Swinnen"></a></p>
+</figure>
+</div>
+<figcaption>Photo by <a href="https://unsplash.com/photos/green-grass-field-near-mountains-under-blue-sky-during-daytime--5M0spOZfc0">Tom Swinnen</a></figcaption></figure>
+</div>
+<section id="background" class="level1"><h1>Background</h1>
+<p>This post is a recap from the <a href="https://www.meetup.com/nebraskarusergroup/">Nebraska R User Group</a>, <a href="https://www.meetup.com/neb-rug/events/307409136/">Failing upward with R: Challenges faced and hard truths learned by a small but scrappy data team on their journey to have an impact</a>, presented by <a href="https://www.collinberke.com/">Collin K. Berke</a>, Ph.D.&nbsp;on 2025-05-06. This post (and perviously a talk), aimed to do the following:</p>
+<ul>
+<li>Introduce workflows a small, but scrappy data team uses to stay <strong>RAD: Reporducible, Automated, and Documented</strong>.</li>
+<li>Allow others to observe how a small, but scrappy data team utilizes R and other open-source tools to find efficiences and have a bigger impact.</li>
+<li>Inform others about the hard truths a small data team confronted when trying to leverage these tools.</li>
+<li>Convince attendees the impact internal R packages can have on their team’s work.</li>
+<li>Show others how tools like Quarto can make your team more human, and your communication more effective.</li>
+</ul>
+<p><strong>Here’s the talk’s abstract:</strong></p>
+<p><em>With the constant evolution of data science tools and the rapid rise in AI, it’s sometimes beneficial–and at times refreshing–to step back and explore how the tools we use, and the ways we work, can have an impact. So let’s step back, revisit some basics, and talk about the fun stuff: workflows, data pipelines, project management, and–most importantly–people.</em></p>
+<p><em>This talk’s aim is to provide an overview of how we–a small but scrappy data team at a public media organization–leverage R and other open source tools to elevate our work and amplify our impact. Besides hearing about some hard-earned wisdom from utilizing R in industry, you’ll get the following by attending this presentation:</em></p>
+<ul>
+<li><p><em>Be introduced to workflows our team uses to stay RAD: Reproducible, Automated, and Documented.</em></p></li>
+<li><p><em>Observe how our team utilizes R and other open-source tools to find efficiencies and have a bigger impact.</em></p></li>
+<li><p><em>Commiserate as a community over the hard truths a small data team faces when trying to leverage these tools.</em></p></li>
+<li><p><em>Be convinced of the impact internal R packages can have on your team’s work.</em></p></li>
+<li><p><em>Discover how tools like Quarto can make your team more human and your communication more effective.</em></p></li>
+</ul>
+<p><em>And hey–you might even have a little fun, too! Stay tuned, and whatever you do … don’t touch that dial.</em></p>
+<p><strong>The slides from the talk can be viewed here:</strong></p>
+<iframe class="slide-deck" src="_presentation-fail_upward_r.html" height="420" width="747" style="border: 1px solid #2e3846;"></iframe>
+<p>The sections below provide a deeper explanation. Enjoy!</p>
+</section><section id="motivation" class="level1"><h1>Motivation</h1>
+<p>Let’s take a trip. Specifically, let’s travel 8 hours and 34 minutes from <a href="https://en.wikipedia.org/wiki/Lincoln,_Nebraska">Lincoln, NE</a>–give or take, depending on where in the world you’re reading this–to an elevation of 7,244 feet: <a href="https://en.wikipedia.org/wiki/Black_Elk_Peak">Black Elk Peak, Custer State Park, South Dakota</a>, the highest summit east of the Rocky Mountains before the Pyrenees in France. If you’ve summited this peak before, like I’ve done several times, you are aware of the decision you have to make at the start of your journey. What trail do you take?</p>
+<div id="fig-custer-trails" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-custer-trails-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-custer-trails" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-trail-black-elk" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure"><div aria-describedby="fig-trail-black-elk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/custer-trails-google-earth.png" class="lightbox" data-gallery="fig-custer-trails" title="Figure&nbsp;1&nbsp;(a): Google Earth rendering of Black Elk Peak’s trails"><img src="images/custer-trails-google-earth.png" class="img-fluid figure-img" data-ref-parent="fig-custer-trails"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-trail-black-elk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) <a href="https://earth.google.com/">Google Earth</a> rendering of Black Elk Peak’s trails
+</figcaption></figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-custer-trails" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-trail-info" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure"><div aria-describedby="fig-trail-info-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/custer-park-trails.png" class="lightbox" data-gallery="fig-custer-trails" title="Figure&nbsp;1&nbsp;(b): Trail information for Custer State Park and Black Elk Peak"><img src="images/custer-park-trails.png" class="img-fluid figure-img" data-ref-parent="fig-custer-trails"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-trail-info-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) <a href="https://gfp.sd.gov/userdocs/black-elk-peak2018.pdf">Trail information for Custer State Park and Black Elk Peak</a>
+</figcaption></figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-custer-trails-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Black Elk Peak, Custer State Park, South Dakota hiking trails (click figures to enlarge)
+</figcaption></figure>
+</div>
+<p>Those with a keen eye will probably spot the allegory behind these images right away: there’s easy and hard ways to get where you’re going. At this point, many of you reading this post have likely come to the conclusion that “Collin’s just here to espouse ideas on how to do things the easy way”. Although I sure wish I had that for you, that’s not what’s here. Rather, what is here is a collection of hard truths and lessons a small, but scrappy data team learned from taking wrong, windy, and at times the hard paths on their journey to be more RAD (reproducible, automated, and documented), efficient, and a little more impactful.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This post is an overview of general workflows and data management practices that have worked for our team over the years. Most of what’s here is based on opinion.</p>
+<p>Your mileage will vary … 🚗💨</p>
+<p>Moreover, there are likely better ways to do what’s described here. Let me know what they are, because I certainly want to be on the right path. Find out how to connect with me <a href="https://www.collinberke.com/">here</a>.</p>
+<p>No proprietary information or data is shared in this post.</p>
+</div>
+</div>
+</section><section id="hard-lessons-learned" class="level1"><h1>Hard lessons learned</h1>
+<section id="have-a-vision-of-where-youre-going" class="level2"><h2 class="anchored" data-anchor-id="have-a-vision-of-where-youre-going">Have a vision of where you’re going</h2>
+<section id="be-useful" class="level3"><h3 class="anchored" data-anchor-id="be-useful">Be useful</h3>
+<p>Riding the <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code> wave is one of the most exhilarating experiences you have when beginning to use R. Just for a moment, let’s rewind time and relive this experience by witnessing the following GIF.</p>
+<div id="fig-install-wave" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-install-wave-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/update-packages.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;2: Riding the install.packages() wave"><img src="images/update-packages.gif" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-install-wave-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Riding the <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code> wave
+</figcaption></figure>
+</div>
+<p>The hacker feeling is exhilarating (obviously a hacker for good, not bad). It makes you feel like you’re doing something cool. Although this is exciting, reality sets in pretty quick …</p>
+<p>We actually have to do something useful with this.</p>
+<div id="fig-install-reality" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-install-reality-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/update-packages.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;3: Meme depicting what’s actually going on here"><img src="images/update-packages.png" width="300" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-install-reality-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Meme depicting what’s actually going on here
+</figcaption></figure>
+</div>
+<p>Thus, the first task was to identify how and where tools like R could be leveraged in useful ways for the work we were doing.</p>
+</section><section id="keep-the-ideal-state-and-end-in-mind" class="level3"><h3 class="anchored" data-anchor-id="keep-the-ideal-state-and-end-in-mind">Keep the ideal state and end in mind</h3>
+<p>But we (mostly myself in the beginning) didn’t know where the application of these tools would be the most useful. I lacked vision, which resulted in several false starts. Most noticeably, a gap existed between the tools we had available and the ideal end state we wanted to achieve (and in some places are still working on today).</p>
+<p>We knew one thing: <a href="https://nebraskapublicmedia.org/en/">Nebraska Public Media</a>, where my team works, does some pretty rad things. As such, we wanted to do some pretty <em>RAD</em> things as well, at least in terms of the data work we were doing. This included being <strong>R</strong>eproducible, <strong>A</strong>utomated, and <strong>D</strong>ocumented. By expressing this out loud, we were able to create a set of questions that served as a kind of framework:</p>
+<ul>
+<li>Can we–in a sensible way–reproduce past analysis and reporting?</li>
+<li>Are we automating everything that we can, while being mindful of the evils lurking around too much optimization?</li>
+<li>When we pivot, are we able to jump back into a project or data product easily?</li>
+<li>Will this work on another computer?</li>
+<li>Are we still being human?</li>
+</ul>
+<p>Moreover, we had to best answer these questions while working in a dynamic industry that’s constantly changing, a space where the tech, measurement, and audiences can be moving targets at times–the media industry. I often liken our work to the movie <a href="https://en.wikipedia.org/wiki/Twister_(1996_film)">Twister</a>, where the plot is about a group of researchers attempting to deploy a device to measure a tornado (AKA <a href="https://twister.fandom.com/wiki/Dorothy">Dorthy</a>).</p>
+<blockquote class="blockquote">
+<p>Melissa: How do you get it in the Tornado?</p>
+<p>Bill: Well you got to get in front of the tornado and put it in the damage path and then get out again before it picks you up to.</p>
+<p>– Scene from Twister</p>
+</blockquote>
+<p>Being aware of this, a question was raised: how can we still reach this ideal end state while also working within a tornado? The answer was internal R packages.</p>
+<p><a href="https://www.youtube.com/watch?v=JThd3YYQXGg">Sharla Gelfand’s Don’t Repeat Yourself, talk to yourself! Reporting with R (talk)</a> was a good starting point. It really laid out a nice solution to solve some of the problems we were facing, and it showed how our problems could be managed by creating internal R packages. As a result, projects were organized into package structures. This greatly aided in reproducibility. In essence, we were creating our own Dorthys to solve our problems.</p>
+<div id="fig-dorthy-flying" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-dorthy-flying-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/dorthy-flying-twister.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;4: The feeling we got when packages aided reproducibility"><img src="images/dorthy-flying-twister.gif" class="quarto-figure quarto-figure-center figure-img" width="400" height="300"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dorthy-flying-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: The feeling we got when packages aided reproducibility
+</figcaption></figure>
+</div>
+<p>Once reproducibility improved, the focus shifted to data accessibility. This led us down the path of further iteration of our Extract, Transform, and Load (ETL) types of work. These internal packages allowed us to go up a level of abstraction, where we were able to take these units of reproducible work and fit them into a somewhat more organized ETL structure.</p>
+<div id="fig-simple-etl" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-simple-etl-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/etl-diagram-background.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;5: A simplified ETL diagram showing the process of making data more accessible"><img src="images/etl-diagram-background.png" width="700" height="300" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-simple-etl-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: A simplified ETL diagram showing the process of making data more accessible
+</figcaption></figure>
+</div>
+</section></section><section id="use-a-guide-follow-those-who-went-before-you" class="level2"><h2 class="anchored" data-anchor-id="use-a-guide-follow-those-who-went-before-you">Use a guide: Follow those who went before you</h2>
+<section id="dont-go-it-alone" class="level3"><h3 class="anchored" data-anchor-id="dont-go-it-alone">Don’t go it alone</h3>
+<p>Look to others who’ve gone before you. Most likely your problems have already been solved, or someone has already come up with a solution that gets you pretty close to what you need. Voices I turn to include:</p>
+<ul>
+<li><a href="https://bsky.app/profile/hadley.nz">Hadley Wickham</a></li>
+<li>
+<a href="https://bsky.app/profile/jennybryan.bsky.social">Jenny Bryan</a> (Is it truly an R talk if you don’t mention Hadley or Jenny?)</li>
+<li><a href="https://bsky.app/profile/jdlong.cerebralmastication.com">JD Long</a></li>
+<li><a href="https://bsky.app/profile/emilyriederer.bsky.social">Emily Riederer</a></li>
+<li><a href="https://www.sharlagelfand.com/">Sharla Gelfand</a></li>
+<li>And countless others …</li>
+</ul>
+<p>Indeed, many of the ideas here are taken directly from these individuals.</p>
+</section></section><section id="adversity-is-unavoidable-so-identify-ways-to-make-work-more-enjoyable" class="level2"><h2 class="anchored" data-anchor-id="adversity-is-unavoidable-so-identify-ways-to-make-work-more-enjoyable">Adversity is unavoidable, so identify ways to make work more enjoyable</h2>
+<section id="the-environments-you-work-in-may-not-be-set-up-for-data-science-work" class="level3"><h3 class="anchored" data-anchor-id="the-environments-you-work-in-may-not-be-set-up-for-data-science-work">The environments you work in may not be set up for data science work</h3>
+<p>Dashboards and data portals for data extraction make me cringe 😬.</p>
+<p>APIs and interfaces to submit queries makes me happy 😃.</p>
+<p>We faced a harsh reality, though.</p>
+<div id="fig-api-waiting" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-api-waiting-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/data-access-joys.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Figure&nbsp;6: A hard lesson to learn"><img src="images/data-access-joys.jpg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-api-waiting-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: A hard lesson to learn
+</figcaption></figure>
+</div>
+<p>Not every service or environment has the user base, resources, or even the need to develop these types of features. Take for example the following plot shared in <a href="https://bsky.app/profile/jdlong.cerebralmastication.com">JD Long’s</a> posit::conf(2025) talk titled <a href="https://www.youtube.com/watch?v=Pa1PNfoOp-I">“It’s Abstracts All the Way Down…”</a>.</p>
+<div id="fig-80-16-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-80-16-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/80-16-4-dist.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Figure&nbsp;7: The 80-16-4 rule"><img src="images/80-16-4-dist.png" width="400" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-80-16-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: The 80-16-4 rule
+</figcaption></figure>
+</div>
+<p>Indeed, many of the tools and services my team interacts with tailor to the 80%, the typical business user. Although convenient for typical business workflows and use cases, some tool’s features limit how you can work with the data, and it can be inflexible when applied in other areas. You have the tools to make the work in these environments more efficient and enjoyable.</p>
+</section><section id="use-what-you-know-to-make-things-better" class="level3"><h3 class="anchored" data-anchor-id="use-what-you-know-to-make-things-better">Use what you know to make things better</h3>
+<p>If you don’t like something, use R to make it better … or at least a little more enjoyable. Keep in mind, R can be a tool to interact with the wider world outside of your current working session (I’m still trying to figure out how I can get it to order my groceries for me, though).</p>
+<p>Smooth is fast. We live in a web-portal world, or at least the world my team interacts with on a regular basis is. These portals require you to log in, click several series of buttons, and select a data export that is in a useful format, like a <code>.csv</code> file. As such, many of these tools utilize URL endpoints to represent the final results of the workflow steps. We found it more enjoyable and useful to wrap these workflows into several utility functions.</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#' Open system browser to FCC's broadband data portal</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' Convenience function to open a system browser window to</span></span>
+<span><span class="co">#' &lt;https://https://broadbandmap.fcc.gov. Function is used</span></span>
+<span><span class="co">#' to quickly open the portal for data extraction tasks.</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' @returns Opens a system browser window.</span></span>
+<span><span class="co">#' @examples</span></span>
+<span><span class="co">#' \dontrun{</span></span>
+<span><span class="co">#' # Open to FCC's data portal</span></span>
+<span><span class="co">#' get_broadband()</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' # Open to a specific report in FCC's portal</span></span>
+<span><span class="co">#' get_broadband(year = 2024, month = "dec")</span></span>
+<span><span class="co">#' }</span></span>
+<span><span class="co">#' @export</span></span>
+<span><span class="va">get_broadband</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">year</span> <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">month</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">portal_url</span> <span class="op">&lt;-</span> <span class="st">"https://broadbandmap.fcc.gov/data-download/nationwide-data"</span></span>
+<span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span> <span class="op">||</span> <span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">month</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://cli.r-lib.org/reference/cli_alert.html">cli_alert_info</a></span><span class="op">(</span></span>
+<span>      <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span></span>
+<span>        <span class="st">"`month` and/or `year` not provided, opening browser to"</span>,</span>
+<span>        <span class="va">portal_url</span>,</span>
+<span>        .sep <span class="op">=</span> <span class="st">" "</span></span>
+<span>      <span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>    <span class="va">url</span> <span class="op">&lt;-</span> <span class="va">portal_url</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>    <span class="va">slug</span> <span class="op">&lt;-</span> <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"?version={month}{year}"</span><span class="op">)</span></span>
+<span>    <span class="va">url</span> <span class="op">&lt;-</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c</a></span><span class="op">(</span><span class="va">portal_url</span>, <span class="va">slug</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/browseURL.html">browseURL</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The above code is an example of a public data portal that is accessible via a URL.</p>
+<p>Indeed, there’s an API available to access this data, so this is just meant to illustrate the point.</p>
+</div>
+</div>
+<p>Now, not only do we have these functions to rely on when we’re in ‘analysis mode’, we also get the added benefit of being able to plug these functions into documentation. As a result, it’s easier for others–and likely our future selves–to review the documentation and run the needed functions to get our work done faster.</p>
+<p>The need for long-winded documentation with extensive screen-grabs of all the clicks needed to export the analysis is no longer necessary. All this mental overhead is abstracted away into nicely named functions, each providing analysts with utility for greater efficiency.</p>
+<p>These utility functions are also helpful by putting docs closer to your finger tips, like making it faster and easier to access specific PDF documents. Take the following as an example.</p>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#' Open data dictionary file</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' Convenience function to open a PDF version of the data dictionary.</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' @returns Opens the PDF via the system's default PDF reader.</span></span>
+<span><span class="co">#' @examples</span></span>
+<span><span class="co">#' \dontrun{</span></span>
+<span><span class="co">#' # Open a PDF of the survey instrument</span></span>
+<span><span class="co">#' open_data_dictionary()</span></span>
+<span><span class="co">#' }</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' @source &lt;https://us-fcc.app.box.com/v/bdc-data-downloads-output&gt;</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' @export</span></span>
+<span><span class="va">open_data_dictionary</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">path</span> <span class="op">&lt;-</span> <span class="fu">here</span><span class="fu">::</span><span class="fu">here</span><span class="op">(</span><span class="st">"vignettes/2025-05-05_broadband-data-dictionary.pdf"</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/system.html">system</a></span><span class="op">(</span><span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"open -a 'google chrome' "</span>, <span class="va">path</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section><section id="have-a-plan-know-where-youre-going-roughly" class="level2"><h2 class="anchored" data-anchor-id="have-a-plan-know-where-youre-going-roughly">Have a plan, know where you’re going (roughly)</h2>
+<section id="make-tough-choices-about-project-structure-as-early-as-possible" class="level3"><h3 class="anchored" data-anchor-id="make-tough-choices-about-project-structure-as-early-as-possible">Make tough choices about project structure as early as possible</h3>
+<p>Make decisions about project structure right from the start. Starting with a package structure is a good foundation, but you may need to modify the structure to fit your work. One key tip: decide on places where different project materials will live right from the start. Here’s an example project structure we follow, using a toy example package I created for this talk.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>.</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>├── DESCRIPTION</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>├── NAMESPACE</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>├── R</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>│   ├── get_broadband.R</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>│   ├── get_drive_data.R</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>│   └── ...</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>├── README.Rmd</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>├── comms</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>├── data</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>│   └── data_broadband.rda</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>├── data-raw</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>│   ├── 2025-05-05_2022-12-31_fcc_broad-band-map_mobile_nebraska.csv</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>│   ├── 2025-05-05_2022-12-31_fcc_broadband-map_mobile_nebraska.csv</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>│   ...</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>├── inst</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>│   ├── app</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>│   │   └── app.R</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>│   ├── reports</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>│   │   ├── 2025-05-05_report-mobile-broadband.qmd</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>│   │   ├── _output</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>│   │   │   └── 2025-05-05_report-mobile-broadband.pdf</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>│   │   └── _quarto.yml</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>│   └── sql</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>│       └── get_bq_broadband.sql</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>├── man</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>│   ├── get_broadband.Rd</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>│   ├── get_drive_data.Rd</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>│   ├── open_data_storage.Rd</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>│   └── vis_broadband_trend.Rd</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>├── tests</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>│   ├── testthat</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>│   └── testthat.R</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>└── vignettes</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    ├── 2025-05-05_broadband-data-dictionary.pdf</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    └── extract-broadband_data.Rmd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Some conventions we follow beyond a standard R package structure include:</p>
+<ul>
+<li>Having a <code>comms</code> directory to store any important communications we have with stakeholders of the project (not all of our projects utilize this, though).</li>
+<li>Utilizing the <code>inst</code> directory to store Shiny applications, reports, and SQL files used for queries.</li>
+<li>Utilizing <code>vignettes</code> for long-form documentation, like manual data extraction steps, and additional data related documentation.</li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This is a very opinionated organizational structure. Indeed, others may have other, better conventions they follow.</p>
+</div>
+</div>
+<p>You might also want to look to others who focus deeply in these areas. In fact, you might find others in your domain already working on this topic. Here’s a few suggestions.</p>
+<blockquote class="bluesky-embed blockquote" data-bluesky-uri="at://did:plc:zxaobre6qygeskx6nr2ew6lu/app.bsky.feed.post/3lnxcdej23s22" data-bluesky-cid="bafyreibnmotdzf3hbbghexm42v5tpfrdb5jex7fnjpls3cvqa47kjc7xfa" data-bluesky-embed-color-mode="system">
+<p lang="en">
+</p>
+<p>Looking for ideas of how to structure a repository when publicly sharing data files from research projects?</p>
+<p>I've created a sample project on <span class="citation" data-cites="cos.io">@cos.io</span> to help you think through this. 👇 #databs #edresearch</p>
+osf.io/59gte/<br><br><a href="https://bsky.app/profile/did:plc:zxaobre6qygeskx6nr2ew6lu/post/3lnxcdej23s22?ref_src=embed">[image or embed]</a>
+
+— Crystal Lewis (<a href="https://bsky.app/profile/did:plc:zxaobre6qygeskx6nr2ew6lu?ref_src=embed"><span class="citation" data-cites="cghlewis.bsky.social">@cghlewis.bsky.social</span></a>) <a href="https://bsky.app/profile/did:plc:zxaobre6qygeskx6nr2ew6lu/post/3lnxcdej23s22?ref_src=embed">Apr 29, 2025 at 7:38 AM</a>
+</blockquote>
+<script async="" src="https://embed.bsky.app/static/embed.js" charset="utf-8"></script><p><a href="https://bsky.app/profile/emilyriederer.bsky.social">Emily Riederer’s</a> blog and talk <a href="https://www.emilyriederer.com/post/team-of-packages/">“Building a team of internal R packages”</a> is also a great resource.</p>
+</section><section id="create-waypoints-to-know-if-youre-on-the-right-path" class="level3"><h3 class="anchored" data-anchor-id="create-waypoints-to-know-if-youre-on-the-right-path">Create waypoints to know if you’re on the right path</h3>
+<p>Now that you have the general structure for your projects, it’s now important to create some type of signage to let you know if you’re on the right path. This involves your naming strategy, including how you name your files. We turn to <a href="https://bsky.app/profile/jennybryan.bsky.social">Jenny Bryan’s</a> <a href="https://www.youtube.com/watch?v=ES1LTlnpLMk">holy trinity for naming files</a> (seriously, take five minutes to change your life by watching this video). The holy trinity states file names should be:</p>
+<ul>
+<li>Machine readable</li>
+<li>Human readable</li>
+<li>Sorted in a useful way</li>
+</ul>
+<p>The focus of this convention is to think in terms of greps, globs, and regular expressions. Doing so makes finding things easier and more enjoyable to work within a project.</p>
+<p>The other important consideration is creating sensible tests through the use of the <a href="https://testthat.r-lib.org/">{testthat} package</a>. This is a pretty expansive topic, so it won’t be discussed in depth here. However, consider writing tests that at least catch the ‘duh’ things:</p>
+<ul>
+<li>Does the package’s data contain the columns I expect?</li>
+<li>Are the columns the data types I expect?</li>
+<li>Does the data follow the structure I expect?</li>
+</ul></section></section><section id="know-when-to-pivot-when-you-get-lost" class="level2"><h2 class="anchored" data-anchor-id="know-when-to-pivot-when-you-get-lost">Know when to pivot when you get lost</h2>
+<section id="not-all-shiny-things-are-useful-or-needed" class="level3"><h3 class="anchored" data-anchor-id="not-all-shiny-things-are-useful-or-needed">Not all shiny things are useful or needed</h3>
+<p>We’ve all had that feeling–when a project gets messy and drifts away from its original intent.</p>
+<div id="fig-project-garbage" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-project-garbage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/dont-touch-my-garbage.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Figure&nbsp;8: How projects end up some times"><img src="images/dont-touch-my-garbage.jpg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-project-garbage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: How projects end up some times
+</figcaption></figure>
+</div>
+<p>Indeed, there may be an urge to improve the project by adding more. Perhaps you may be considering additions of the newest and shiniest tech to help improve the project. Fight this urge. Really consider what’s needed for the project before adding more.</p>
+<p>A good frame work is the pain scale shared by <a href="https://bsky.app/profile/csgillespie.bsky.social">Colin Gillespie’s</a> <a href="https://www.youtube.com/watch?v=RwLxCk6bDnY">Getting the Most Out of Git talk</a>. Although this talk is mostly focused on the utilization of git within project workflows, I believe the pain scale applies to anything you want to add to a project.</p>
+<div id="fig-project-pain" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-project-pain-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/pain-scale.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Figure&nbsp;9: The level of pain inflicted if something goes wrong"><img src="images/pain-scale.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-project-pain-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9: The level of pain inflicted if something goes wrong
+</figcaption></figure>
+</div>
+<p>The premise is simple: determine how much pain will be inflicted if something goes wrong. On the one hand, if you’re working on a critical project that will create major pain and suffering if it fails, then you need to utilize additional tools and practices to avoid this pain and suffering at all costs. On the other hand, if your project fails and no one cares, do you really need the additional overhead? Some project ‘additions’ I’ve added that should have been measured with this pain scale include:</p>
+<ul>
+<li>We need a full devops CI/CD pipeline for this Shiny app.</li>
+<li>Hey, we can manage our own Airflow instance for ETL pipelines.</li>
+<li>Perhaps this repo needs to follow a complex git branching structure for versions, features, and fixes.</li>
+<li>Oh, Docker should be easy to setup.</li>
+</ul>
+<p>These certainly are not criticisms of these technologies or approaches, rather they were misplaced applications to projects that didn’t necessitate this level of overhead for my team at the time.</p>
+</section></section><section id="take-others-along-on-your-journey" class="level2"><h2 class="anchored" data-anchor-id="take-others-along-on-your-journey">Take others along on your journey</h2>
+<section id="be-where-your-audience-is" class="level3"><h3 class="anchored" data-anchor-id="be-where-your-audience-is">Be where your audience is</h3>
+<p>In the media industry, we have a saying: be where your audience is. This also applies to your data work. Really consider what stakeholders will find useful. Does this include:</p>
+<ul>
+<li>A simple SQL query to extract data?</li>
+<li>A static PDF sent to an email?</li>
+<li>An arranged dataset in an Excel file?</li>
+<li>A fully functional Shiny app?</li>
+<li>An updatable slide deck presentation?</li>
+</ul>
+<p>Not only is it important to figure out what type of output will engage people, you also need to consider where people spend most of their time. Email? Teams? Slack? Discord? Or some type of internal wiki? These spaces will dictate the types of output you can create. Moreover, it might also require you to leverage some tricks to get things to work or to prop something up for someone. <a href="https://quarto.org/">Quarto</a> has been a big help, especially with its many output formats. <a href="https://3mw.albert-rapp.de/p/scalable-reporting-with-quarto">Parameterized reports</a> are another area that seems promising that we look to explore further.</p>
+</section><section id="be-a-human" class="level3"><h3 class="anchored" data-anchor-id="be-a-human">Be a human</h3>
+<p>The last lesson we learned is simple: identify ways to be more human. This starts by taking time to observe how your data is being created and used.</p>
+<p>Let’s be real, at least in the context we work in, most people want the information they need to do a good job and get things done–towards the goal of contributing to the organization’s ability to meet its mission. As such, only build the things people need, not what you think they need. This may require you to be a human and actually talk with the people who create, own, or use the data, and further discuss what their needs are. And at times, you may need to create the first draft to get the conversation started and to prime the process of iteration. In short: create things useful to other people.</p>
+</section></section></section><section id="wrap-up" class="level1"><h1>Wrap up</h1>
+<blockquote class="blockquote">
+<p>“Dèyè mòn, gen mòn”</p>
+<p>Beyond the mountains, more mountains</p>
+<p>– Haitian proverb</p>
+</blockquote>
+<p>Even though we’ve climbed some mountains as a team, there are still many yet to be submitted on our journey. If you’ve stuck around this long, hopefully you found some wisdom here. Certainly this post (or the talk) wasn’t meant to have all the answers. Rather it was a collection of hard truths learned through observation and experience. Hopefully our failures (mostly mine because I have an awesome team) and the lessons we learned lead you to greater success. At the very least, I hope what’s here results in easier summits for you and your team.</p>
+<p>If you’re interested in these topics or want to show me a better way, let’s connect:</p>
+<ul>
+<li>Come find me at a <a href="https://www.meetup.com/nebraskarusergroup/">Nebraska R User Group Meetup</a>–no, seriously, come join us!</li>
+<li>Check out my blog at <a href="https://www.collinberke.com/">collinberke.com</a>
+</li>
+<li>Connect with me on LinkedIn <a href="https://www.linkedin.com/in/collinberke/"><span class="citation" data-cites="collinberke">@collinberke</span></a>
+</li>
+<li>Follow me on GitHub <a href="https://github.com/collinberke"><span class="citation" data-cites="collinberke">@collinberke</span></a>
+</li>
+<li>Follow me on BlueSky <a href="https://bsky.app/profile/collinberke.bsky.social"><span class="citation" data-cites="collinberke.bsky.social">@collinberke.bsky.social</span></a>
+</li>
+</ul>
+
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/neb-rug\.github\.io\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2025 Nebraska R User Group. Powered by Quarto.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/neb-rug/neb-rug.github.io/edit/main/posts/failing_upward_r/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/neb-rug/neb-rug.github.io/blob/main/posts/failing_upward_r/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/neb-rug/neb-rug.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+</body></html>
