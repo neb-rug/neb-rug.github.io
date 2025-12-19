@@ -1,0 +1,18 @@
+---
+title: 'Taking the Leap and Landing Gracefully in Industry'
+author:
+  - Brandi Pessman
+date: '2026-01-27'
+categories:
+  - data science
+  - job search
+  - industry
+description: "Nebraska R User Group talk given by Brandi Pessman."
+image: "images/hands.jpg"
+draft: true
+---
+
+On January 27, 2026, [Dr. Brandi Pessman](https://www.linkedin.com/in/brandipessman) gave a Nebraska R User Group presentation on "Taking the Leap and Landing Gracefully in Industry". Dr. Pessmann received her Ph.D. in Biology from the University of Nebraska-Lincoln (UNL) in May 2024, where her research focused on the effects of vibratory noise in cities on spider behavior. She continued spider-related research as a postdoctoral researcher at UNL until the summer of 2025, when she transitioned into an industry role as a data scientist at Quantum Workplace, an all-in-one HR software company that empowers every team to thrive.
+
+![[Source: Christin Hume on Unsplash](https://unsplash.com/photos/person-using-laptop-computer-Hcfwew744z4)](images/laptop.jpg){fig-alt="Person in yellow sweater typing on laptop."}
+
