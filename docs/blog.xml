@@ -9,7 +9,7 @@
 <link>https://neb-rug.github.io/blog.html</link>
 <atom:link href="https://neb-rug.github.io/blog.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.7.31</generator>
+<generator>quarto-1.8.26</generator>
 <lastBuildDate>Tue, 06 May 2025 05:00:00 GMT</lastBuildDate>
 <item>
   <title>Failing upward with R</title>
@@ -191,7 +191,7 @@ Figure&nbsp;7: The 80-16-4 rule
 <p>If you don’t like something, use R to make it better … or at least a little more enjoyable. Keep in mind, R can be a tool to interact with the wider world outside of your current working session (I’m still trying to figure out how I can get it to order my groceries for me, though).</p>
 <p>Smooth is fast. We live in a web-portal world, or at least the world my team interacts with on a regular basis is. These portals require you to log in, click several series of buttons, and select a data export that is in a useful format, like a <code>.csv</code> file. As such, many of these tools utilize URL endpoints to represent the final results of the workflow steps. We found it more enjoyable and useful to wrap these workflows into several utility functions.</p>
 <div class="cell">
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">#' Open system browser to FCC's broadband data portal</span></span>
 <span><span class="co" style="color: #5E5E5E;
@@ -402,7 +402,7 @@ background-color: null;
 font-style: inherit;">)</span></span>
 <span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">}</span></span></code></pre></div>
+font-style: inherit;">}</span></span></code></pre></div></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -422,7 +422,7 @@ Note
 <p>The need for long-winded documentation with extensive screen-grabs of all the clicks needed to export the analysis is no longer necessary. All this mental overhead is abstracted away into nicely named functions, each providing analysts with utility for greater efficiency.</p>
 <p>These utility functions are also helpful by putting docs closer to your finger tips, like making it faster and easier to access specific PDF documents. Take the following as an example.</p>
 <div class="cell">
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">#' Open data dictionary file</span></span>
 <span><span class="co" style="color: #5E5E5E;
@@ -519,12 +519,12 @@ background-color: null;
 font-style: inherit;">)</span></span>
 <span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">}</span></span></code></pre></div>
+font-style: inherit;">}</span></span></code></pre></div></div>
 </div>
 </section></section><section id="have-a-plan-know-where-youre-going-roughly" class="level2"><h2 class="anchored" data-anchor-id="have-a-plan-know-where-youre-going-roughly">Have a plan, know where you’re going (roughly)</h2>
 <section id="make-tough-choices-about-project-structure-as-early-as-possible" class="level3"><h3 class="anchored" data-anchor-id="make-tough-choices-about-project-structure-as-early-as-possible">Make tough choices about project structure as early as possible</h3>
 <p>Make decisions about project structure right from the start. Starting with a package structure is a good foundation, but you may need to modify the structure to fit your work. One key tip: decide on places where different project materials will live right from the start. Here’s an example project structure we follow, using a toy example package I created for this talk.</p>
-<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb3-1">.</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb3-1">.</span>
 <span id="cb3-2">├── DESCRIPTION</span>
 <span id="cb3-3">├── NAMESPACE</span>
 <span id="cb3-4">├── R</span>
@@ -559,7 +559,7 @@ font-style: inherit;">}</span></span></code></pre></div>
 <span id="cb3-33">│   └── testthat.R</span>
 <span id="cb3-34">└── vignettes</span>
 <span id="cb3-35">    ├── 2025-05-05_broadband-data-dictionary.pdf</span>
-<span id="cb3-36">    └── extract-broadband_data.Rmd</span></code></pre></div>
+<span id="cb3-36">    └── extract-broadband_data.Rmd</span></code></pre></div></div>
 <p>Some conventions we follow beyond a standard R package structure include:</p>
 <ul>
 <li>Having a <code>comms</code> directory to store any important communications we have with stakeholders of the project (not all of our projects utilize this, though).</li>
@@ -697,7 +697,7 @@ Figure&nbsp;9: The level of pain inflicted if something goes wrong
 <p>Fortunately, some libraries have come along that are supported by big players and look to be here for the long haul. Specifically, the library I’m going to make use of here is <a href="https://ellmer.tidyverse.org/"><code>{ellmer}</code></a> from the folks who brought you the <a href="https://www.tidyverse.org/"><code>{tidyverse}</code></a>.</p>
 <p>The beauty of <code>{ellmer}</code> is that it gives you a more standardized interface to the blizzard of commercial LLM APIs as well as the same interface to locally hosted LLMs through <a href="https://ollama.com/">Ollama</a>. In my personal work, I like having Ollama running to test ideas out without worrying about running up a bill at OpenAI, Anthropic, Google, etc. Google also offers a free tier for access to their Gemini models, which is fantastic if you are doing a limited number of things, or know how to throttle your needs to stay below their usage limits.</p>
 <p>All you need for the Gemini free tier is <a href="https://ai.google.dev/gemini-api/docs/api-key">to get an API key with your Google account</a>. The ellmer documentation will tell you how to store it locally for easier access. And once you have that set up, you can do silly things like this:</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">library</span>(ellmer)</span>
 <span id="cb1-2"></span>
@@ -713,10 +713,10 @@ font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">chat</span>(<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"Tell me three jokes about journalists"</span>)</span></code></pre></div>
+font-style: inherit;">"Tell me three jokes about journalists"</span>)</span></code></pre></div></div>
 <p>The output will tell you everything you need to know about how well LLMs understand humor. I won’t spoil it by posting it here.</p>
 <p>That’s it. That’s all it takes to talk to an LLM. Want to talk to a locally hosted model?</p>
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">chat <span class="ot" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">chat <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -732,7 +732,7 @@ font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">chat</span>(<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"Tell me three jokes about journalists"</span>)</span></code></pre></div>
+font-style: inherit;">"Tell me three jokes about journalists"</span>)</span></code></pre></div></div>
 <p>For me, the easy part is always the hello world example like this. The hard part is now applying it to something I need to get done. And if you’ve worked with LLMs, this is where you <em>really</em> find the limitations of them. The demo is always amazing. The reality is always less so.</p>
 <p>As a data analyst, the dream of anyone who has had to laboriously clean up data has always been to find some way to make a computer do it for you. For the last 25 years I’ve been working with data, I’ve got my trunk of tools to slice and dice poorly normalized text columns to try and make them useful. But like any good 80/20 problem, all the tricks in the world run out at some point and you’re left cleaning up 20 percent of the crap by hand. And it’s boring and it sucks and I hate it.</p>
 <p>Of course the first thing I thought about throwing at the alien intelligence now living on my computer was a horrible job of cleaning up terrible data.</p>
@@ -746,7 +746,7 @@ DELIVERY OF METHAMPHETAMINE
 POSS W/ INTENT DIST METH</code></pre>
 <p>What can you even do with that? Answer: structured output queries to LLMs. Most of the LLM models out there now will support structured output (usually JSON) and <code>{ellmer}</code> makes it easy to turn those into R objects you’re used to working with.</p>
 <p>Here’s an example of a zero shot query to Gemini that is relying on the names of the columns alone to extract meaning:</p>
-<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">chat <span class="ot" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">chat <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -786,9 +786,9 @@ font-style: inherit;">fully_spelled_out_no_abbreviations =</span> <span class="f
 background-color: null;
 font-style: inherit;">type_string</span>()</span>
 <span id="cb4-10">  )</span>
-<span id="cb4-11">)</span></code></pre></div>
+<span id="cb4-11">)</span></code></pre></div></div>
 <p>I’m asking it to take the phrase “POSS W/ INTENT DIST METH” and tell me if it’s meth related, if it’s possession related, if it’s distribution related and then fully spell out the charge. Here’s what Gemini comes back with:</p>
-<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">Using model <span class="ot" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">Using model <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">=</span> <span class="st" style="color: #20794D;
 background-color: null;
@@ -828,9 +828,9 @@ font-style: inherit;">$</span>fully_spelled_out_no_abbreviations</span>
 background-color: null;
 font-style: inherit;">1</span>] <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"Possession With Intent To Distribute Methamphetamine"</span></span></code></pre></div>
+font-style: inherit;">"Possession With Intent To Distribute Methamphetamine"</span></span></code></pre></div></div>
 <p><code>{ellmer}</code> has a method of adding a system prompt — which goes with each query — that you can add all kinds of context and goal setting to. For example, instead of just shotgunning this out and praying Gemini infers what I mean, I can add this:</p>
-<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">chat <span class="ot" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">chat <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -900,7 +900,7 @@ font-style: inherit;">fully_spelled_out_no_abbreviations =</span> <span class="f
 background-color: null;
 font-style: inherit;">type_string</span>()</span>
 <span id="cb6-20">  )</span>
-<span id="cb6-21">)</span></code></pre></div>
+<span id="cb6-21">)</span></code></pre></div></div>
 <p>I’m still testing this out with the full dataset and using only locally hosted models, so I can’t say yet how well it works. But in testing, it’s very good. I tested 100 records and 99 of them were correct. I’m now working on how to set up multiple LLMs to try it and then compare the results to each other to see if I can create a consensus opinion on each row.</p>
 <p>It’s bonkers to me that last year, the best I could do with this data was throw 30 undergraduate data journalism students at the problem and hope for the best. In a very short time, with a maturing set of tools and a little bit of creativity, the dream of a competent and tireless data assistant is starting to take shape.</p>
 <p>For another example of using LLMs to aid in creating data maps, check out <a href="https://mattwaite.github.io/posts/a-simple-example-ai-agents-doing-journalism/">A simple example of AI agents(?) doing journalism(?) work</a>.</p>
@@ -945,7 +945,7 @@ font-style: inherit;">type_string</span>()</span>
 </div>
 <p>Let’s import the data from the #TidyTuesday data repository.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">orcas <span class="ot" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">orcas <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> readr<span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -953,11 +953,11 @@ font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">read_csv</span>(<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2024/2024-10-15/orcas.csv'</span>)</span></code></pre></div>
+font-style: inherit;">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2024/2024-10-15/orcas.csv'</span>)</span></code></pre></div></div>
 </div>
 <p>A quick plot of this data shows the locations of encounters:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">library</span>(ggplot2)</span>
 <span id="cb2-2">orcas <span class="sc" style="color: #5E5E5E;
@@ -976,7 +976,7 @@ background-color: null;
 font-style: inherit;">+</span></span>
 <span id="cb2-4">  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">geom_point</span>()</span></code></pre></div>
+font-style: inherit;">geom_point</span>()</span></code></pre></div></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -998,7 +998,7 @@ font-style: inherit;">geom_point</span>()</span></code></pre></div>
 <h1>Creating <em>stat</em> objects and functions</h1>
 <p>Before we create a new <em>stat</em> function, we have to create a new <em>stat</em> object that computes the convex hull. Fortunately, there is a function for that (<code>grDevices::chull()</code>) that we can embed in our <em>stat</em> object. So here we use <code>ggproto()</code> to create a new object based on the prototype <em>stat</em> that computes for each group the subset of data points that represent the convex hull.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">StatChull <span class="ot" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">StatChull <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1033,11 +1033,11 @@ font-style: inherit;">=</span> <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">FALSE</span>]</span>
 <span id="cb3-6">  }</span>
-<span id="cb3-7">)</span></code></pre></div>
+<span id="cb3-7">)</span></code></pre></div></div>
 </div>
 <p>Now we need to create the <em>stat</em> function. Because we need the function to draw a polygon based on the convex hull points, we will use the <code>polygon</code> <em>geom</em> as the base for this function. We include a <code>layer()</code> function and keep most of the rest of the arguments this same to avoid messing up all of the automatic benefits we get of using the <code>polygon</code> <em>geom</em>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">stat_chull <span class="ot" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">stat_chull <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
@@ -1101,11 +1101,11 @@ font-style: inherit;">list</span>(<span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">na.rm =</span> na.rm, ...)</span>
 <span id="cb4-9">  )</span>
-<span id="cb4-10">}</span></code></pre></div>
+<span id="cb4-10">}</span></code></pre></div></div>
 </div>
 <p>We can now use our new <code>stat_chull()</code> function two draw the convex hull around the data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">orcas <span class="sc" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">orcas <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span> </span>
 <span id="cb5-2">  <span class="fu" style="color: #4758AB;
@@ -1126,7 +1126,7 @@ background-color: null;
 font-style: inherit;">+</span> </span>
 <span id="cb5-4">  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">geom_point</span>() </span></code></pre></div>
+font-style: inherit;">geom_point</span>() </span></code></pre></div></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1137,7 +1137,7 @@ font-style: inherit;">geom_point</span>() </span></code></pre></div>
 </div>
 <p>We have drawn a convex hull! But the fill and transparency defaults aren’t great. Fortunately, we can pass standard aesthetic arguments to the function to control line color and polygon fill and transparency.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">orcas <span class="sc" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">orcas <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span> </span>
 <span id="cb6-2">  <span class="fu" style="color: #4758AB;
@@ -1170,7 +1170,7 @@ background-color: null;
 font-style: inherit;">+</span> </span>
 <span id="cb6-4">  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">geom_point</span>() </span></code></pre></div>
+font-style: inherit;">geom_point</span>() </span></code></pre></div></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1184,7 +1184,7 @@ font-style: inherit;">geom_point</span>() </span></code></pre></div>
 <h1>Creating <em>geom</em> objects and functions</h1>
 <p>But if we want to set different defaults from the original <em>geom</em> (in this case <code>polygon</code>), we also need to set up our own <em>geom</em> object and function. We will create a new <em>geom</em> object called <code>GeomChull</code> based on the prototype object <code>GeomPolygon</code>. Then we’ll define new aesthetic defaults.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1">GeomChull <span class="ot" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1">GeomChull <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1228,11 +1228,11 @@ font-style: inherit;">subgroup=</span><span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">NULL</span></span>
 <span id="cb7-6">    )</span>
-<span id="cb7-7">)</span></code></pre></div>
+<span id="cb7-7">)</span></code></pre></div></div>
 </div>
 <p>With the new <em>geom</em> object in place, we need to create a new <em>geom</em> function that uses the <code>chull</code> stat that we created and the <code>GeomChull</code> object.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">geom_chull <span class="ot" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">geom_chull <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
@@ -1301,11 +1301,11 @@ background-color: null;
 font-style: inherit;">na.rm =</span> na.rm, <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">rule =</span> rule, ...))</span>
-<span id="cb8-9">}</span></code></pre></div>
+<span id="cb8-9">}</span></code></pre></div></div>
 </div>
 <p>Now we can use <code>geom_chull()</code> instead of <code>stat_chull()</code> and we have a new set of default aesthetics.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1">orcas <span class="sc" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1">orcas <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span> </span>
 <span id="cb9-2">  <span class="fu" style="color: #4758AB;
@@ -1326,7 +1326,7 @@ background-color: null;
 font-style: inherit;">+</span> </span>
 <span id="cb9-4">  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">geom_point</span>() </span></code></pre></div>
+font-style: inherit;">geom_point</span>() </span></code></pre></div></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1340,7 +1340,7 @@ font-style: inherit;">geom_point</span>() </span></code></pre></div>
 <h1>Bonus side effects</h1>
 <p>Again, because we left so many of the arguments the same, we can do cool things like automatically have the function apply to facets.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">orcas <span class="sc" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">orcas <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span> </span>
 <span id="cb10-2">  <span class="fu" style="color: #4758AB;
@@ -1372,7 +1372,7 @@ font-style: inherit;">~</span>lubridate<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">month</span>(date))</span></code></pre></div>
+font-style: inherit;">month</span>(date))</span></code></pre></div></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1383,7 +1383,7 @@ font-style: inherit;">month</span>(date))</span></code></pre></div>
 </div>
 <p>Or apply the function to groups.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1">orcas <span class="sc" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1">orcas <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span> </span>
 <span id="cb11-2">  <span class="fu" style="color: #4758AB;
@@ -1409,7 +1409,7 @@ background-color: null;
 font-style: inherit;">+</span> </span>
 <span id="cb11-5">  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">geom_point</span>() </span></code></pre></div>
+font-style: inherit;">geom_point</span>() </span></code></pre></div></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">

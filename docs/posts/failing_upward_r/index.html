@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.8.26">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Collin K. Berke, Ph.D.">
 <meta name="dcterms.date" content="2025-05-06">
@@ -66,18 +66,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-8ef56b68f8fa1e9d2ba328e99e439f80.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-5c6543d11d135143532e01599a533527.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-4f3bd90c0e54df154c59c851a0f5cf9e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-5c6543d11d135143532e01599a533527.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-a572092c64d0b674b92ec07500080ae6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-281b1c89a83d9bc1034274a163f14a50.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-a572092c64d0b674b92ec07500080ae6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -581,7 +582,7 @@ Figure&nbsp;7: The 80-16-4 rule
 <p>If you don’t like something, use R to make it better … or at least a little more enjoyable. Keep in mind, R can be a tool to interact with the wider world outside of your current working session (I’m still trying to figure out how I can get it to order my groceries for me, though).</p>
 <p>Smooth is fast. We live in a web-portal world, or at least the world my team interacts with on a regular basis is. These portals require you to log in, click several series of buttons, and select a data export that is in a useful format, like a <code>.csv</code> file. As such, many of these tools utilize URL endpoints to represent the final results of the workflow steps. We found it more enjoyable and useful to wrap these workflows into several utility functions.</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#' Open system browser to FCC's broadband data portal</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#' Open system browser to FCC's broadband data portal</span></span>
 <span><span class="co">#'</span></span>
 <span><span class="co">#' Convenience function to open a system browser window to</span></span>
 <span><span class="co">#' &lt;https://https://broadbandmap.fcc.gov. Function is used</span></span>
@@ -615,7 +616,7 @@ Figure&nbsp;7: The 80-16-4 rule
 <span>  <span class="op">}</span></span>
 <span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/browseURL.html">browseURL</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -635,7 +636,7 @@ Note
 <p>The need for long-winded documentation with extensive screen-grabs of all the clicks needed to export the analysis is no longer necessary. All this mental overhead is abstracted away into nicely named functions, each providing analysts with utility for greater efficiency.</p>
 <p>These utility functions are also helpful by putting docs closer to your finger tips, like making it faster and easier to access specific PDF documents. Take the following as an example.</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#' Open data dictionary file</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#' Open data dictionary file</span></span>
 <span><span class="co">#'</span></span>
 <span><span class="co">#' Convenience function to open a PDF version of the data dictionary.</span></span>
 <span><span class="co">#'</span></span>
@@ -653,12 +654,12 @@ Note
 <span>  <span class="va">path</span> <span class="op">&lt;-</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"vignettes/2025-05-05_broadband-data-dictionary.pdf"</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/system.html">system</a></span><span class="op">(</span><span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"open -a 'google chrome' "</span>, <span class="va">path</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section></section><section id="have-a-plan-know-where-youre-going-roughly" class="level2"><h2 class="anchored" data-anchor-id="have-a-plan-know-where-youre-going-roughly">Have a plan, know where you’re going (roughly)</h2>
 <section id="make-tough-choices-about-project-structure-as-early-as-possible" class="level3"><h3 class="anchored" data-anchor-id="make-tough-choices-about-project-structure-as-early-as-possible">Make tough choices about project structure as early as possible</h3>
 <p>Make decisions about project structure right from the start. Starting with a package structure is a good foundation, but you may need to modify the structure to fit your work. One key tip: decide on places where different project materials will live right from the start. Here’s an example project structure we follow, using a toy example package I created for this talk.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>.</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>.</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>├── DESCRIPTION</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>├── NAMESPACE</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>├── R</span>
@@ -693,7 +694,7 @@ Note
 <span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>│   └── testthat.R</span>
 <span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>└── vignettes</span>
 <span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    ├── 2025-05-05_broadband-data-dictionary.pdf</span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    └── extract-broadband_data.Rmd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    └── extract-broadband_data.Rmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Some conventions we follow beyond a standard R package structure include:</p>
 <ul>
 <li>Having a <code>comms</code> directory to store any important communications we have with stakeholders of the project (not all of our projects utilize this, though).</li>
@@ -865,13 +866,14 @@ Figure&nbsp;9: The level of pain inflicted if something goes wrong
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

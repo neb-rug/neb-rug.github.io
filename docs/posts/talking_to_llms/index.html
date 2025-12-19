@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.8.26">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -70,18 +70,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-8ef56b68f8fa1e9d2ba328e99e439f80.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-1c254813f03f394af81581ebb693298a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-d4e25cda8c1e4398075f677b77b923a6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-1c254813f03f394af81581ebb693298a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-42017143d1ea4c871584ee2276bea3bc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-fc194ff9766ea272153180488e432cb1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-42017143d1ea4c871584ee2276bea3bc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -385,16 +386,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Fortunately, some libraries have come along that are supported by big players and look to be here for the long haul. Specifically, the library I’m going to make use of here is <a href="https://ellmer.tidyverse.org/"><code>{ellmer}</code></a> from the folks who brought you the <a href="https://www.tidyverse.org/"><code>{tidyverse}</code></a>.</p>
 <p>The beauty of <code>{ellmer}</code> is that it gives you a more standardized interface to the blizzard of commercial LLM APIs as well as the same interface to locally hosted LLMs through <a href="https://ollama.com/">Ollama</a>. In my personal work, I like having Ollama running to test ideas out without worrying about running up a bill at OpenAI, Anthropic, Google, etc. Google also offers a free tier for access to their Gemini models, which is fantastic if you are doing a limited number of things, or know how to throttle your needs to stay below their usage limits.</p>
 <p>All you need for the Gemini free tier is <a href="https://ai.google.dev/gemini-api/docs/api-key">to get an API key with your Google account</a>. The ellmer documentation will tell you how to store it locally for easier access. And once you have that set up, you can do silly things like this:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ellmer)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ellmer)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>chat <span class="ot">&lt;-</span> <span class="fu">chat_gemini</span>()</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>chat<span class="sc">$</span><span class="fu">chat</span>(<span class="st">"Tell me three jokes about journalists"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>chat<span class="sc">$</span><span class="fu">chat</span>(<span class="st">"Tell me three jokes about journalists"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The output will tell you everything you need to know about how well LLMs understand humor. I won’t spoil it by posting it here.</p>
 <p>That’s it. That’s all it takes to talk to an LLM. Want to talk to a locally hosted model?</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>chat <span class="ot">&lt;-</span> <span class="fu">chat_ollama</span>(<span class="at">model =</span> <span class="st">"llama3.2"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>chat <span class="ot">&lt;-</span> <span class="fu">chat_ollama</span>(<span class="at">model =</span> <span class="st">"llama3.2"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>chat<span class="sc">$</span><span class="fu">chat</span>(<span class="st">"Tell me three jokes about journalists"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>chat<span class="sc">$</span><span class="fu">chat</span>(<span class="st">"Tell me three jokes about journalists"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>For me, the easy part is always the hello world example like this. The hard part is now applying it to something I need to get done. And if you’ve worked with LLMs, this is where you <em>really</em> find the limitations of them. The demo is always amazing. The reality is always less so.</p>
 <p>As a data analyst, the dream of anyone who has had to laboriously clean up data has always been to find some way to make a computer do it for you. For the last 25 years I’ve been working with data, I’ve got my trunk of tools to slice and dice poorly normalized text columns to try and make them useful. But like any good 80/20 problem, all the tricks in the world run out at some point and you’re left cleaning up 20 percent of the crap by hand. And it’s boring and it sucks and I hate it.</p>
 <p>Of course the first thing I thought about throwing at the alien intelligence now living on my computer was a horrible job of cleaning up terrible data.</p>
@@ -408,7 +409,7 @@ DELIVERY OF METHAMPHETAMINE
 POSS W/ INTENT DIST METH</code></pre>
 <p>What can you even do with that? Answer: structured output queries to LLMs. Most of the LLM models out there now will support structured output (usually JSON) and <code>{ellmer}</code> makes it easy to turn those into R objects you’re used to working with.</p>
 <p>Here’s an example of a zero shot query to Gemini that is relying on the names of the columns alone to extract meaning:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>chat <span class="ot">&lt;-</span> <span class="fu">chat_gemini</span>()</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>chat <span class="ot">&lt;-</span> <span class="fu">chat_gemini</span>()</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>chat<span class="sc">$</span><span class="fu">extract_data</span>(</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"POSS W/ INTENT DIST METH"</span>,</span>
@@ -418,9 +419,9 @@ POSS W/ INTENT DIST METH</code></pre>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">distribution_related =</span> <span class="fu">type_boolean</span>(),</span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">fully_spelled_out_no_abbreviations =</span> <span class="fu">type_string</span>()</span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>I’m asking it to take the phrase “POSS W/ INTENT DIST METH” and tell me if it’s meth related, if it’s possession related, if it’s distribution related and then fully spell out the charge. Here’s what Gemini comes back with:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Using model <span class="ot">=</span> <span class="st">"gemini-1.5-flash"</span>.</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Using model <span class="ot">=</span> <span class="st">"gemini-1.5-flash"</span>.</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span>methamphetamine_related</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="cn">TRUE</span></span>
@@ -432,9 +433,9 @@ POSS W/ INTENT DIST METH</code></pre>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="cn">TRUE</span></span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span>fully_spelled_out_no_abbreviations</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"Possession With Intent To Distribute Methamphetamine"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"Possession With Intent To Distribute Methamphetamine"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>{ellmer}</code> has a method of adding a system prompt — which goes with each query — that you can add all kinds of context and goal setting to. For example, instead of just shotgunning this out and praying Gemini infers what I mean, I can add this:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>chat <span class="ot">&lt;-</span> <span class="fu">chat_gemini</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>chat <span class="ot">&lt;-</span> <span class="fu">chat_gemini</span>(</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">system_prompt =</span> <span class="st">"You are a data entry clerk normalizing some bad data. The data you </span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="st">    are working with are criminal charges that current prison inmates are serving time </span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="st">    for. Your job is to help normalize the name of the charge by spelling out all of </span></span>
@@ -454,7 +455,7 @@ POSS W/ INTENT DIST METH</code></pre>
 <span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">distribution_related =</span> <span class="fu">type_boolean</span>(),</span>
 <span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">fully_spelled_out_no_abbreviations =</span> <span class="fu">type_string</span>()</span>
 <span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>I’m still testing this out with the full dataset and using only locally hosted models, so I can’t say yet how well it works. But in testing, it’s very good. I tested 100 records and 99 of them were correct. I’m now working on how to set up multiple LLMs to try it and then compare the results to each other to see if I can create a consensus opinion on each row.</p>
 <p>It’s bonkers to me that last year, the best I could do with this data was throw 30 undergraduate data journalism students at the problem and hope for the best. In a very short time, with a maturing set of tools and a little bit of creativity, the dream of a competent and tireless data assistant is starting to take shape.</p>
 <p>For another example of using LLMs to aid in creating data maps, check out <a href="https://mattwaite.github.io/posts/a-simple-example-ai-agents-doing-journalism/">A simple example of AI agents(?) doing journalism(?) work</a>.</p>
@@ -526,13 +527,14 @@ POSS W/ INTENT DIST METH</code></pre>
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
