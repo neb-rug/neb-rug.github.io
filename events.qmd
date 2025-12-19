@@ -5,31 +5,42 @@ toc: false
 
 All Neb-RUG events are posted on our [Meetup page](https://www.meetup.com/neb-rug/). Join now to receive invites to future events!
 
-## [Failing Upward with R by Dr. Collin Berke](https://www.meetup.com/neb-rug/events/307409136)
+## Upcoming
+
+### [Taking the Leap and Landing Gracefully in Industry by Dr. Brandi Pessman](https://www.meetup.com/neb-rug/events/312433565/)
+* 4-5pm, Tuesday, January 27th 2026
+* [Center for Brain, Biology & Behavior](https://cb3.unl.edu), University of Nebraska-Lincoln
+
+
+## 2025
+
+
+### [Failing Upward with R by Dr. Collin Berke](https://www.meetup.com/neb-rug/events/307409136)
 * 3:30-4:30pm, Tuesday, May 6th
 * [Center for Brain, Biology & Behavior](https://cb3.unl.edu), University of Nebraska-Lincoln
 * [Blogpost](posts/failing_upward_r/index.qmd)
 
-## [Creating Beautiful PDFs via HTML/CSS/JS by Dr. Yihui Xie](https://www.meetup.com/neb-rug/events/306923229/)
+### [Creating Beautiful PDFs via HTML/CSS/JS by Dr. Yihui Xie](https://www.meetup.com/neb-rug/events/306923229/)
 * 1:00-2:00pm, Wednesday, April 9th
 * [Animal Science Complex A128](https://maps.unl.edu/ANSC), University of Nebraska-Lincoln
 * [Slides](https://slides.yihui.org/2025-pages-litedown.html)
 
 
-## [Talking to LLMs Through R by Matt Waite](https://www.meetup.com/neb-rug/events/305756231/)
+### [Talking to LLMs Through R by Matt Waite](https://www.meetup.com/neb-rug/events/305756231/)
 * 4:00-5:30pm, Tuesday, February 18th
 * [Center for Brain, Biology & Behavior](https://cb3.unl.edu), University of Nebraska-Lincoln
 * [Blogpost](posts/talking_to_llms/index.qmd)
 
+## 2024
 
-## [Extensions to ggplot2 are easy – right? by Dr. Heike Hofmann](https://www.meetup.com/neb-rug/events/304415398/)
+### [Extensions to ggplot2 are easy – right? by Dr. Heike Hofmann](https://www.meetup.com/neb-rug/events/304415398/)
 * 4:30-6:00pm, Wednesday, December 4th
 * [Nebraska East Union](https://unions.unl.edu/east/), University of Nebraska-Lincoln
 * Slides ([html](https://heike.github.io/NebRUG-2024/2024-12-04-ggplot2-extensions/ggplot2-extensions.html) [pdf](https://heike.github.io/NebRUG-2024/2024-12-04-ggplot2-extensions/ggplot2-extensions.pdf))
 * [Blogpost](posts/ggplot2_extensions/index.qmd)
 
 
-## [Nebraska R User Group Kickoff Meeting](https://www.meetup.com/neb-rug/events/303806893/)
+### [Nebraska R User Group Kickoff Meeting](https://www.meetup.com/neb-rug/events/303806893/)
 * 4-5:30pm, Tuesday, October 29th
 * [Center for Brain, Biology & Behavior](https://cb3.unl.edu), University of Nebraska-Lincoln
 * [R Consortium blogpost](https://r-consortium.org/posts/connecting-nebraska-through-r-jeffrey-stevens-journey-of-community-building/)
