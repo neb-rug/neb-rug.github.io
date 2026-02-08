@@ -5,11 +5,14 @@ toc: false
 
 All Neb-RUG events are posted on our [Meetup page](https://www.meetup.com/neb-rug/). Join now to receive invites to future events!
 
-## Upcoming
+<!-- ## Upcoming -->
+
+## 2026
 
 ### [Taking the Leap and Landing Gracefully in Industry by Dr. Brandi Pessman](https://www.meetup.com/neb-rug/events/312433565/)
 * 4-5pm, Tuesday, January 27th 2026
 * [Center for Brain, Biology & Behavior](https://cb3.unl.edu), University of Nebraska-Lincoln
+* [Slides](slides/pessman_2026.pdf)
 
 
 ## 2025
