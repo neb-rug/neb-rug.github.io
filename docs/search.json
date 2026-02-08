@@ -77,13 +77,6 @@
     "text": "All Neb-RUG events are posted on our Meetup page. Join now to receive invites to future events!"
   },
   {
-    "objectID": "events.html#upcoming",
-    "href": "events.html#upcoming",
-    "title": "Events",
-    "section": "Upcoming",
-    "text": "Upcoming\n\nTaking the Leap and Landing Gracefully in Industry by Dr. Brandi Pessman\n\n4-5pm, Tuesday, January 27th 2026\nCenter for Brain, Biology & Behavior, University of Nebraska-Lincoln"
-  },
-  {
     "objectID": "events.html#section",
     "href": "events.html#section",
     "title": "Events",
@@ -98,6 +91,13 @@
     "text": "2025\n\nFailing Upward with R by Dr. Collin Berke\n\n3:30-4:30pm, Tuesday, May 6th\nCenter for Brain, Biology & Behavior, University of Nebraska-Lincoln\nBlogpost\n\n\n\nCreating Beautiful PDFs via HTML/CSS/JS by Dr. Yihui Xie\n\n1:00-2:00pm, Wednesday, April 9th\nAnimal Science Complex A128, University of Nebraska-Lincoln\nSlides\n\n\n\nTalking to LLMs Through R by Matt Waite\n\n4:00-5:30pm, Tuesday, February 18th\nCenter for Brain, Biology & Behavior, University of Nebraska-Lincoln\nBlogpost"
   },
   {
+    "objectID": "events.html#section-2",
+    "href": "events.html#section-2",
+    "title": "Events",
+    "section": "2024",
+    "text": "2024\n\nExtensions to ggplot2 are easy – right? by Dr. Heike Hofmann\n\n4:30-6:00pm, Wednesday, December 4th\nNebraska East Union, University of Nebraska-Lincoln\nSlides (html pdf)\nBlogpost\n\n\n\nNebraska R User Group Kickoff Meeting\n\n4-5:30pm, Tuesday, October 29th\nCenter for Brain, Biology & Behavior, University of Nebraska-Lincoln\nR Consortium blogpost"
+  },
+  {
     "objectID": "blog.html",
     "href": "blog.html",
     "title": "Neb-RUG Blog",
@@ -110,12 +110,5 @@
     "title": "Welcome to Neb-RUG!",
     "section": "",
     "text": "We are excited to kickoff the Nebraska R User Group! This group is for anyone in Nebraska who is interested in using R for statistics, data visualization, machine learning, and more. Whether you are a beginner or an experienced R user, this group is a great opportunity to network with like-minded individuals, share resources and tips, and collaborate on projects. Join us for regular meetups, workshops, and discussions to deepen your R programming skills and explore new possibilities in data analysis. Let’s come together to learn, grow, and advance our data science journey with R!\nTo kickoff this group, we will have our first meeting on October 29th at the Center for Brain, Biology & Behavior inside Memorial Stadium on the University of Nebraska-Lincoln campus. Check out our events page and join our Meetup group to find out about a future (and past) events. We hope to see you at our kickoff meeting!"
-  },
-  {
-    "objectID": "events.html#section-2",
-    "href": "events.html#section-2",
-    "title": "Events",
-    "section": "2024",
-    "text": "2024\n\nExtensions to ggplot2 are easy – right? by Dr. Heike Hofmann\n\n4:30-6:00pm, Wednesday, December 4th\nNebraska East Union, University of Nebraska-Lincoln\nSlides (html pdf)\nBlogpost\n\n\n\nNebraska R User Group Kickoff Meeting\n\n4-5:30pm, Tuesday, October 29th\nCenter for Brain, Biology & Behavior, University of Nebraska-Lincoln\nR Consortium blogpost"
   }
 ]
